@@ -1,0 +1,115 @@
+.block--stats-slider {
+
+}
+
+.stats-slider {
+    width: calc(100% + 60px);
+}
+
+.stat-slide {
+    width: 25vw;
+    font-size: $fs-4xl;
+    font-weight: $bold;
+    padding-right: $gutter;
+
+    em {
+        font-style: normal;
+    }
+
+    &:last-child {
+        width: calc(25vw + #{$gutter/2});
+        padding-right: #{$gutter/2*3};
+    }
+}
+
+.stat-slide__in {
+    width: 100%;
+    aspect-ratio: 1/1.6;
+    padding: .4em;
+}
+
+.stat-slide--bg-green,
+.stat-slide--bg-blue {
+
+    &.stat-slide--text-black {
+        em {
+            color: $white;
+        }
+    }
+
+    &.stat-slide--text-white {
+        em {
+            color: $black;
+        }
+    }
+}
+
+.stat-slide--bg-green {
+    .stat-slide__in {
+        background-color: $primary-green;
+    }
+}
+
+.stat-slide--bg-blue {
+    .stat-slide__in {
+        background-color: $primary-blue;
+    }
+    
+}
+
+.stat-slide--bg-grey {
+    .stat-slide__in {
+        background-color: $lightest-grey;
+    }
+
+    &.stat-slide--text-black {
+        em {
+            color: $primary-blue;
+        }
+    }
+
+    &.stat-slide--text-blue,
+    &.stat-slide--text-green {
+        em {
+            color: $black;
+        }
+    }
+}
+
+.stat-slide--text-black {
+    color: black;
+}
+
+.stat-slide--text-white {
+    color: $white;
+}
+
+.stat-slide--text-green {
+    color: $white;
+}
+
+.stat-slide--text-blue {
+    color: $primary-blue;
+}
+
+.stat-slide__title {
+    font-size: $fs-lg;
+}
+
+.stat-slide__stat {
+    display: block;
+    margin: .333333em 0;
+
+    &:first-child,
+    &:only-child {
+        margin-top: 0;
+    }
+}
+
+.stat-slide__detail {
+    font-size: $fs-md;
+    font-weight: $medium;
+    p {
+        
+    }
+}

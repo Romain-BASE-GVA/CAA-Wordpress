@@ -1,0 +1,50 @@
+.side-nav {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.side-nav__list {
+    //--h: 0;
+    @include clean-list;
+    position: relative;
+    font-size: $fs-sm;
+    position: sticky;
+    top: calc(var(--top-bar-h) + #{$gutter});
+
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+    }
+
+    &:before {
+        height: 100%;
+        background-color: $light-grey;
+    }
+
+    &:after {
+        height: var(--h);
+        background-color: $black;
+    }
+
+}
+
+.side-nav__item {
+    padding-left: .4em;
+}
+
+.side-nav__link {
+    position: relative;
+    color: $light-grey;
+    
+    @include transition;
+
+    &--is-active,
+    &:hover {
+        color: $black;
+    }
+
+}

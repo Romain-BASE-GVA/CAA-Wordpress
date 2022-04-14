@@ -1,0 +1,73 @@
+// @mixin font-size($min, $valVW, $max, $size) {
+//     font-size: ($size * 10px);
+//     font-size: ($size * 1rem);
+//     font-size: min(max(#{$min}, #{$valVW}), #{$max});
+//     font-size: clamp(#{$min}, #{$valVW}, #{$max});
+// }
+
+// @mixin fs-xs {
+//     @include font-size(12px, .715vw, 20px, 1);
+// }
+
+// @mixin fs-sm {
+//     @include font-size(14px, 1.0715vw, 30px, 1.5);
+// }
+
+// @mixin fs-md {
+//     @include font-size(15px, 1.0715vw, 35px, 2);
+// }
+
+// @mixin fs-lg {
+//     @include font-size(17px, 1.785vw, 40px, 2.5);
+// }
+
+// @mixin fs-xl {
+//     @include font-size(20px, 2.858vw, 80px, 4);
+// }
+
+// @mixin fs-2xl {
+//     @include font-size(25px, 3.572vw, 100px, 5);
+// }
+
+// @mixin fs-3xl {
+//     @include font-size(35px, 6.429vw, 180px, 9);
+// }
+
+@mixin img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@mixin bg-cover {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@mixin clean-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+@mixin transition($properties: all, $duration: .3s, $timing-function: ease-in-out){
+    transition: $properties $duration $timing-function;
+}
+
+@mixin grid() {
+    display: grid;
+    grid-column-gap: $gutter;
+    grid-row-gap: $gutter;
+}
+
+@mixin grid-column($num){
+    grid-template-columns: repeat($num, 1fr);
+}
+
+@mixin box-shadow($opacity: .1, $color: $black){
+    box-shadow: 0 0 10px 5px rgba($color, $opacity);
+}

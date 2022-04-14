@@ -1,0 +1,28 @@
+.quote {
+    position: relative;
+    margin-top: $gutter;
+
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: $gutter / -2;
+        left: $gutter * -1;
+        width: calc(100% + #{$gutter * 2});
+        height: calc(100% + #{$gutter});
+        background-color: rgba($primary-blue, .2);
+        border-radius: $gutter / 2;
+    }
+}
+
+.quote__blockquote {
+    margin: 0;
+    font-weight: $bold;
+    color: $primary-blue;
+}
+
+.quote__caption {
+    font-weight: $regular;
+    color: $black;
+}
+

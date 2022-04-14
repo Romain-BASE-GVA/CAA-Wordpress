@@ -1,0 +1,119 @@
+.hotspot {
+    position: relative;
+}
+
+.hotspot__spot {
+    --x-pos: 50%; 
+    --y-pos: 50%;
+    position: absolute;
+    top: calc(var(--y-pos) - 32px);
+    left: calc(var(--x-pos) - 32px);
+}
+
+.hotspot__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: $white;
+    border: none;
+    border-radius: $gutter/2;
+    font-size: $fs-4xl;
+    overflow: hidden;
+    cursor: pointer;
+    @include transition;
+
+    &:after {
+        content: "+";
+        display: block;
+        transform: translateY(-3%);
+        @include transition;
+    }
+
+
+    &:hover {
+        &:after {
+            color: $primary-blue;
+        }
+        
+    }
+}
+
+.hotspot__content {
+    position: absolute;
+    width: 600px;
+    padding: $fs-sm;
+    font-weight: $medium;
+    background-color: $white;
+    border-radius: $gutter/4;
+    @include box-shadow(0);
+    // top: 50%;
+    // left: calc(50% - 300px);
+    // transform: translate3d(0, -40%, 0);
+    opacity: 0;
+    visibility: hidden;
+    @include transition;
+
+    .hotspot__spot:hover & {
+        //transform: translate3d(0, -50%, 0);
+        @include box-shadow(.05);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &--center {
+        top: 50%;
+        left: calc(50% - 300px);
+        transform: translate3d(0, -40%, 0);
+
+        .hotspot__spot:hover &{
+            transform: translate3d(0, -50%, 0);
+        }
+    }
+
+    &--top-left {
+        top: 0;
+        left: -20px;
+        transform: translate3d(0, 0, 0);
+
+        .hotspot__spot:hover & {
+            transform: translate3d(0, -20px, 0);
+        }
+    }
+
+    &--top-right {
+        top: 0;
+        right: -20px;
+        transform: translate3d(0, 0, 0);
+
+        .hotspot__spot:hover & {
+            transform: translate3d(0, -20px, 0);
+        }
+    }
+
+    &--bottom-left {
+        bottom: 0;
+        left: -20px;
+        transform: translate3d(0, 0, 0);
+
+        .hotspot__spot:hover & {
+            transform: translate3d(0, 20px, 0);
+        }
+    }
+
+    &--bottom-right {
+        bottom: 0;
+        right: -20px;
+        transform: translate3d(0, 0, 0);
+
+        .hotspot__spot:hover & {
+            transform: translate3d(0, 20px, 0);
+        }
+    }
+
+    p {
+        margin: 0;
+        font-size: $fs-sm;
+    }
+}

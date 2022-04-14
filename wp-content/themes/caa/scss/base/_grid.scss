@@ -1,0 +1,337 @@
+// $grid-gutter: 30px;
+
+// // $container-width: 1120px;
+// // $container-width: 1320px;
+// $container-width: 1690px;
+
+// $col-1-width: 100% / 12;
+// $col-fifth-width: 100% / 5;
+// $col-2-width: 100% / 6;
+// $col-third-width: 100% / 3;
+// $col-3-width: (100% / 12) * 3;
+// $col-4-width: 100% / 3;
+// $col-5-width: (100% / 12) * 5;
+// $col-6-width: 50%;
+// $col-7-width: (100% / 12) * 7;
+// $col-8-width: (100% / 12) * 8;
+// $col-9-width: (100% / 12) * 9;
+// $col-10-width: (100% / 12) * 10;
+// $col-11-width: (100% / 12) * 11;
+// $col-12-width: 100%;
+
+// .container {
+//     padding-right: $grid-gutter / 2;
+//     padding-left: $grid-gutter / 2;
+//     margin-right: auto;
+//     margin-left: auto;
+//     width: $container-width;
+
+//     @media screen and (max-width: $xxl){
+//         // width: 970px;
+//         width: 1350px;
+//     }
+
+//     @media screen and (max-width: $xl){
+//         // width: 970px;
+//         width: 100%;
+//         padding-left: 50px;
+//         padding-right: 50px;
+//     }
+
+//     @media screen and (max-width: $lg){
+//         // width: 750px;
+//         width: auto;
+//         padding-left: 30px;
+//         padding-right: 30px;
+//     }
+
+//     @media screen and (max-width: $md){
+//         width: auto;
+//         padding-left: 20px;
+// 		padding-right: 20px;
+//     }
+// }
+
+// .container-fluid {
+//     padding-right: $grid-gutter;
+//     padding-left: $grid-gutter;
+//     margin-right: auto;
+//     margin-left: auto;
+//     width: auto;
+
+//     @media screen and (max-width: $md){
+//         width: auto;
+//         padding-left: 20px;
+// 		padding-right: 20px;
+//     }
+// }
+
+// .row {
+//     margin-right: $grid-gutter / -2;
+//     margin-left: $grid-gutter / -2;
+//     display: flex;
+//     flex-wrap: wrap;
+
+//     @media screen and (max-width: $md){
+//         margin-right: -10px;
+//         margin-left: -10px;
+//     }
+// }
+
+// .row--center {
+//     justify-content: center;
+// }
+
+// @mixin row {
+//     margin-right: $grid-gutter / -2;
+//     margin-left: $grid-gutter / -2;
+//     display: flex;
+//     flex-wrap: wrap;
+
+//     @media screen and (max-width: $md){
+//         margin-right: -10px;
+//         margin-left: -10px;
+//     }
+// }
+
+// @mixin col {
+//     position: relative;
+//     min-height: 1px;
+//     padding-right: $grid-gutter / 2;
+//     padding-left: $grid-gutter / 2;
+
+//     @media screen and (max-width: $md){
+//         padding-right: 10px;
+//         padding-left: 10px;
+//     }
+// }
+
+// @mixin col-1 {
+//     flex: 0 0 $col-1-width;
+//     width: $col-1-width;
+//     max-width: $col-1-width;
+// }
+
+// @mixin col-fifth {
+//     flex: 0 0 $col-fifth-width;
+//     width: $col-fifth-width;
+//     max-width: $col-fifth-width;
+// }
+
+// @mixin col-2 {
+//     flex: 0 0 $col-2-width;
+//     width: $col-2-width;
+//     max-width: $col-2-width;
+// }
+
+// @mixin col-3 {
+//     flex: 0 0 $col-3-width;
+//     width: $col-3-width;
+//     max-width: $col-3-width;
+// }
+
+// @mixin col-third {
+//     flex: 0 0 $col-third-width;
+//     width: $col-third-width;
+//     max-width: $col-third-width;
+// }
+
+// @mixin col-4 {
+//     flex: 0 0 $col-4-width;
+//     width: $col-4-width;
+//     max-width: $col-4-width;
+// }
+
+// @mixin col-5 {
+//     flex: 0 0 $col-5-width;
+//     width: $col-5-width;
+//     max-width: $col-5-width;
+// }
+
+// @mixin col-6 {
+//     flex: 0 0 $col-6-width;
+//     width: $col-6-width;
+//     max-width: $col-6-width;
+// }
+
+// @mixin col-7 {
+//     flex: 0 0 $col-7-width;
+//     width: $col-7-width;
+//     max-width: $col-7-width;
+// }
+
+// @mixin col-8 {
+//     flex: 0 0 $col-8-width;
+//     width: $col-8-width;
+//     max-width: $col-8-width;
+// }
+
+// @mixin col-9 {
+//     flex: 0 0 $col-9-width;
+//     width: $col-9-width;
+//     max-width: $col-9-width;
+// }
+
+// @mixin col-10 {
+//     flex: 0 0 $col-10-width;
+//     width: $col-10-width;
+//     max-width: $col-10-width;
+// }
+
+// @mixin col-11 {
+//     flex: 0 0 $col-11-width;
+//     width: $col-11-width;
+//     max-width: $col-11-width;
+// }
+
+// @mixin col-12 {
+//     flex: 0 0 $col-12-width;
+//     width: $col-12-width;
+//     max-width: $col-12-width;
+// }
+
+// @mixin offset-none {
+//     margin-left: 0;
+// }
+
+// @mixin offset-1 {
+//     margin-left: $col-1-width;
+// }
+// @mixin offset-2 {
+//     margin-left: $col-2-width;
+// }
+// @mixin offset-3 {
+//     margin-left: $col-3-width;
+// }
+// @mixin offset-4 {
+//     margin-left: $col-4-width;
+// }
+// @mixin offset-5 {
+//     margin-left: $col-5-width;
+// }
+// @mixin offset-6 {
+//     margin-left: $col-6-width;
+// }
+
+// .col {
+//     @include col;
+// }
+
+// .col-1 {
+//     @include col-1;
+// }
+
+// .col-fifth {
+//     @include col-fifth;
+// }
+
+// .col-2 {
+//     @include col-2;
+// }
+
+// .col-3 {
+//     @include col-3;
+// }
+
+// .col-third {
+//     @include col-third;
+// }
+
+// .col-4 {
+//     @include col-4;
+// }
+
+// .col-5 {
+//     @include col-5;
+// }
+
+// .col-6,
+// .col-half {
+//     @include col-6;
+// }
+
+// .col-7 {
+//     @include col-7;
+// }
+
+// .col-8 {
+//     @include col-8;
+// }
+
+// .col-9 {
+//     @include col-9;
+// }
+
+// .col-10 {
+//     @include col-10;
+// }
+
+// .col-11 {
+//     @include col-11;
+// }
+
+// .col-12 {
+//     @include col-12;
+// }
+
+// .col-sm-full {
+    
+//     @media screen and (max-width: $md){
+//         @include col-12;
+//     }
+// }
+
+// .offset-none {
+//     @include offset-none;
+// }
+// .offset-1 {
+//     @include offset-1;
+// }
+// .offset-2 {
+//     @include offset-2;
+// }
+// .offset-3 {
+//     @include offset-3;
+// }
+// .offset-4 {
+//     @include offset-4;
+// }
+// .offset-5 {
+//     @include offset-5;
+// }
+// .offset-6 {
+//     @include offset-6;
+// }
+
+.grid {
+    @include grid();
+    padding: 0 $gutter*3/2;
+}
+
+.grid--1 {
+    @include grid-column(1);
+}
+
+.grid--2 {
+    @include grid-column(2);
+}
+
+.grid--3 {
+    @include grid-column(3);
+}
+
+.grid--4 {
+    @include grid-column(4);
+}
+
+.grid--6 {
+    @include grid-column(6);
+}
+
+.grid--8 {
+    @include grid-column(8);
+}
+
+.grid--12 {
+    @include grid-column(12);
+}

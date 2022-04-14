@@ -1,0 +1,84 @@
+// BREAKPOINTS
+
+$sm : 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1350px;
+$xxl: 1700px;
+$xxxl: 2200px;
+
+// COLORS
+
+$black: #000000;
+$white: #FFF;
+
+$lightest-grey: #F5F5F5;
+$light-grey: #d3d3d3;
+$normal-grey: #bcbcbc;
+$dark-grey: #a4a4a4;
+$darkest-grey: #808080;
+
+$primary-blue: #0066FF;
+$primary-green: #37CD7B;
+$yellow: #FFE058;
+$green: #D4F98E;
+$orange: #FB643C;
+$purple: #B78AE4;
+$digital-blue: #6865FA;
+$light-blue: #40A9EF;
+$pink: #FF86B9;
+
+$color-primary: $primary-blue;
+$color-secondary: $primary-green;
+
+// FONTS
+
+$font-primary: 'DM Sans', sans-serif;
+$font-secondary: 'Roboto Mono', monospace;
+
+$regular: 400;
+$medium: 500;
+$bold: 700;
+
+$fs-2xs: 1.2rem;
+$fs-xs: 1.5rem;
+$fs-sm: 2rem;
+$fs-md: 2.5rem;
+$fs-lg: 3rem;
+$fs-xl: 4rem;
+$fs-2xl: 5.5rem;
+$fs-3xl: 6rem;
+$fs-4xl: 7.8rem;
+$fs-5xl: 11rem;
+
+
+// SPACING
+
+$space-xs: 10px;
+$space-sm: 20px;
+$space-md: 30px;
+$space-lg: 40px;
+$space-xl: 60px;
+$space-2xl: 90px;
+$space-3xl: 110px;
+
+// GUTTER
+
+$gutter: 40px;
+
+// font-size: min(max(#{$min}, #{$valVW}), #{$max});
+// font-size: clamp(#{$min}, #{$valVW}, #{$max});
+
+// $space-min-max-sm: min(max(#{$min}, #{$valVW}), #{$max});
+// $space-min-max-md: min(max(#{$min}, #{$valVW}), #{$max});
+// $space-min-max-lg: min(max(#{$min}, #{$valVW}), #{$max});
+// $space-min-max-xl: min(max(#{$min}, #{$valVW}), #{$max});
+// $space-min-max-2xl: min(max(#{$min}, #{$valVW}), #{$max});
+// $space-min-max-3xl: min(max(#{$min}, #{$valVW}), #{$max});
+
+// $space-clamp-sm: clamp();
+// $space-clamp-md: clamp();
+// $space-clamp-lg: clamp();
+// $space-clamp-xl: clamp();
+// $space-clamp-2xl: clamp();
+// $space-clamp-3xl: clamp();

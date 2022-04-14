@@ -1,0 +1,29 @@
+.btn {
+    display: inline-block;
+    font-weight: $medium;
+    @include transition;
+}
+
+.btn--regular {
+    font-size: $fs-md;
+    padding: .5em 1em;
+}
+
+.btn--blue {
+    color: $primary-blue;
+    background-color: rgba($primary-blue, .4);
+
+    &:hover {
+        color: white;
+        background-color: rgba($primary-blue, 1);
+    }
+}
+
+.btn--rounded {
+    border-radius: 15px;
+}
+
+.btn--small {
+    // font-size: $fs-md;
+    // padding: .5em 1em;
+}

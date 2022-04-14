@@ -1,0 +1,161 @@
+.footer {
+	background-color: #00CD77;
+}
+
+.footer__contact,
+.footer__nav {
+	// padding: 50px;
+	// border-radius: 50px 50px 0 0;
+}
+
+.footer__title {
+	color: #37CD7B;
+
+}
+
+footer ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.footer__social-list {
+	display: flex;
+	
+	li {
+		margin-right: 10px;
+		
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+.footer__nav {
+	background-color: transparent;
+	color: white;
+	position: relative;
+	z-index: 1;
+	
+	.footer__wrapper {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 1fr;
+		grid-gap: 40px;
+		background: #0066FF;
+		border-radius: 50px 50px 0 0;
+		padding: 50px;
+		box-shadow: 0 0 15px 0 rgb(0 0 0 / 20%);
+	}
+}
+
+.footer__contact {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-gap: 40px;
+	padding: 50px;
+	background-color: white;
+	border-radius: 50px 50px 0 0;
+	box-shadow: 0 0 15px 0 rgb(0 0 0 / 20%);
+	
+	form {
+		max-width: 100%;
+		
+		> div {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 20px;
+			
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	textarea {
+		width: 100%;
+		border: 1px solid grey;
+		border-radius: 5px;
+  	resize: none;
+		padding: 10px;
+		box-shadow: 0 0 2px 2px rgba(#0066FF, 0);
+		transition: all .25s ease-in-out;
+		
+		&:focus {
+			outline: none;
+			border: 1px solid rgb(0 102 255 / 50%);
+			box-shadow: 0px 0px 15px 0px rgb(0 102 255 / 20%);
+		}
+	}
+	
+	input {
+		border: 1px solid grey;
+		border-radius: 5px;
+		flex: 0 0 calc(50% - 10px);
+		padding: 10px;
+		box-shadow: 0 0 2px 2px rgba(#0066FF, 0);
+		transition: all .25s ease-in-out;
+		
+		&:focus {
+			outline: none;
+			border: 1px solid rgb(0 102 255 / 50%);
+			box-shadow: 0px 0px 15px 0px rgb(0 102 255 / 20%);
+		}
+		
+		&:first-child {
+			margin-right: 20px;
+		}
+	}
+	
+	button {
+		background-color: #0066FF;
+		border: none;
+		border-radius: 5px;
+		padding: 10px;
+		width: 100%;
+		color: white;
+		cursor: pointer;
+	}
+	
+	&:after {
+		position: absolute;
+		left: 0;
+		top: 100%;
+		content: '';
+		display: block;
+		width: 100%;
+		height: 50px;
+		background-color: white;
+		
+	}
+}
+
+.footer__logo {
+	grid-area: 1 / 1 / 2 / 3;
+	
+	svg {
+		width: 100px;
+	}
+}
+
+.footer__logo__circle {
+	fill: white;
+}
+
+.footer__logo__a {
+	fill: #0066FF;
+}
+
+.footer__newsletter {
+	grid-area: 1 / 3 / 2 / 7;
+}
+
+.footer__nav__list--1 {
+	grid-area: 1 / 7 / 2 / 9;
+}
+
+.footer__nav__list--2 {
+	grid-area: 1 / 9 / 2 / 11;
+}

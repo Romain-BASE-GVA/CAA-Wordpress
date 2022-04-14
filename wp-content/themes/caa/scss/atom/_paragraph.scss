@@ -1,0 +1,16 @@
+p {
+    font-family: $font-primary;
+    line-height: 1.333333333;
+
+    &:last-child,
+    &:only-child {
+        margin: 0;
+    }
+}
+
+.big-text {
+    font-size: $fs-3xl;
+    font-weight: $medium;
+    line-height: 1.06;
+    color: $primary-blue;
+}

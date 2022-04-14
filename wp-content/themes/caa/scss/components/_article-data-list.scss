@@ -1,0 +1,6 @@
+.article-data-list {
+    @include clean-list;
+    font-size: $fs-sm;
+    grid-column: 1 / -1;
+    line-height: 1.5;
+}

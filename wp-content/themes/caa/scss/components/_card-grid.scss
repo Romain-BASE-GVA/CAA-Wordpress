@@ -1,0 +1,20 @@
+.card-grid {
+    width: 100%;
+    padding: $gutter/2*3;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+
+    @media (max-width: $xxxl) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: $xxl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: $lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
