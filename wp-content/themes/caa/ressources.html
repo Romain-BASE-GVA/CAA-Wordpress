@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>CAA CARDS</title>
+  <title>CAA RESSOURCES</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -205,13 +205,41 @@
     <!-- CARD SOLUTION -->
     
 
-    <main>
-        <div class="ressources-search-bar">
-            <input type="text">
-            <button class="ressources-search-bar"></button>
+    <main style="margin-top: 30vh;">
+        <div class="ressources-top-search">
+            <div class="ressources-search-bar" id="ressources-search-bar"> </div>
+            <div class="current-filters"></div>
+            <div class="ressources-filters">
+                <div class="ressources-filters__filters">
+                    <h2>filtrer par :</h2>
+                    <div class="ref-list">
+                        <div class="ref-list__title">Solution Areas</div>
+                        <div class="ref-list__list ref-list__list--areas"></div>
+                    </div>
+                    <div class="ref-list">
+                        <div class="ref-list__title">Sector</div>
+                        <div class="ref-list__list ref-list__list--sectors"></div>
+                    </div>
+                    <div class="ref-list">
+                        <div class="ref-list__title">Type</div>
+                        <div class="ref-list__list ref-list__list--post-type"></div>
+                    </div>
+                </div>
+                <div class="clear-all"></div>
+            </div>
+            <div>
+                <h1>Resultats</h1>
+                <div class="grid-switch">
+                    <div class="grid-mode">
+                        <button class="grid-mode__button grid-mode__button--grid">
+                            <span> </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="ressources-filters"></div>
-        <div class="ressources-results card-grid">
+        <div class="ressources-results" id="ressources-results"></div>
+        <div class="ressources-results card-grid" style="display: none">
             <div class="card card--rounded card--solution">
                 <a href="#" class="card__link" title=""><span>Réduire la distance parcourue par les marchandises et privilégier les sources d’approvisionnement locales.</span></a>
                 <div class="card-in">
@@ -427,7 +455,6 @@
                     </footer>
                 </div>
             </div>
-        
             <!-- CARD ACTU -->
         
             <div class="card card--news">

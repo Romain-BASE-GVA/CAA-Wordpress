@@ -1,13 +1,25 @@
 <?php
 
+$thePostTypes = array('post', 'areas', 'events', 'experts', 'partners', 'resources', 'solutions', 'experiences');
+
 function algolia_post_to_record(WP_Post $post) {
     $tags = array_map(function (WP_Term $term) {
         return $term->name;
     }, wp_get_post_terms($post->ID, 'tags'));
 
-    $fields = array_map(function (WP_Term $term) {
-        return $term->name;
-    }, wp_get_post_terms($post->ID, 'field'));
+    // $fields = array_map(function (WP_Term $term) {
+    //     return $term->name;
+    // }, wp_get_post_terms($post->ID, 'field'));
+
+    $areas = get_field('solution_areas', $post->ID);
+    $relatedAreas = array();
+
+    if( $areas ):
+        foreach( $areas as $area ):
+            $areaTitle = get_the_title( $area->ID );
+            array_push($relatedAreas, $areaTitle);
+        endforeach;
+    endif;
 
     $sectors = array_map(function (WP_Term $term) {
         return $term->name;
@@ -111,6 +123,36 @@ function algolia_post_to_record(WP_Post $post) {
                     endwhile;
                 endif;
 
+            elseif( get_row_layout() == 'dropdowns' ): 
+                $title = get_sub_field('block_title');
+                // Do something...
+                $pageContent .= ' ' . $title;
+
+                if( have_rows('dropdown') ):
+                    while ( have_rows('dropdown') ) : the_row();
+                        $dropdownTitle = get_sub_field('title');
+                        $dropdownContent = get_sub_field('content', false, false);
+
+                        $pageContent .= ' ' . $dropdownTitle . ' ' . $dropdownContent;
+
+                    endwhile;
+                endif;
+
+            elseif( get_row_layout() == 'quotes' ): 
+                $title = get_sub_field('block_title');
+                // Do something...
+                $pageContent .= ' ' . $title;
+
+                if( have_rows('quote') ):
+                    while ( have_rows('quote') ) : the_row();
+                        $quote = get_sub_field('content');
+                        $caption = get_sub_field('caption');
+
+                        $pageContent .= ' ' . $quote . ' ' . $caption;
+
+                    endwhile;
+                endif;
+
             elseif( get_row_layout() == 'grid_list' ): 
                 $title = get_sub_field('block_title');
                 
@@ -147,48 +189,74 @@ function algolia_post_to_record(WP_Post $post) {
         'objectID' => implode('#', [$post->post_type, $post->ID]),
         'postType' => $post->post_type,
         'title' => $post->post_title,
-        // 'author' => [
-        //     'id' => $post->post_author,
-        //     'name' => get_user_by('ID', $post->post_author)->display_name,
-        // ],
+        'date' => get_the_time('d.m.y', $post->ID),
         'partnerInfo' => array('logoUrl' => $partnerLogo['url'], 'linkTitle' => $partnerLink['title'], 'linkUrl' => $partnerLink['url']),
         'intro' => $introduction,
-        //'excerpt' => $post->post_excerpt,
         'mainImage' => $featured_img_url,
-        //'content' => strip_tags($post->post_content),
         'tags' => $tags,
-        'fields' => $fields,
+        'areas' => $relatedAreas,
         'sectors' => $sectors,
         'url' => get_post_permalink($post->ID),
-        // 'pageContent' => get_field('content_block', $post->ID ),
         'pageContent' => $pageContent,
     ];
 }
 
+// function algolia_update_post($id, WP_Post $post, $update) {
+    
+//     if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
+//         return $post;
+//     }
+
+//     global $algolia;
+
+//     $record = (array) apply_filters($post->post_type.'_to_record', $post);
+
+//     if (!isset($record['objectID'])) {
+//         $record['objectID'] = implode('#', [$post->post_type, $post->ID]);
+//     }
+
+//     $index = $algolia->initIndex(
+//         apply_filters('algolia_index_name', 'CAA-test')
+//     );
+
+//     if ('trash' == $post->post_status) {
+//         $index->deleteObject($record['objectID']);
+//     } else {
+//         $index->saveObject($record);
+//     }
+
+//     return $post;
+// }
+
 function algolia_update_post($id, WP_Post $post, $update) {
-    if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
-        return $post;
-    }
 
-    global $algolia;
+    //if(in_array($post->post_type, $thePostTypes)) {
 
-    $record = (array) apply_filters($post->post_type.'_to_record', $post);
+        if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
+            algolia_post_to_record($post);
+        }
 
-    if (!isset($record['objectID'])) {
-        $record['objectID'] = implode('#', [$post->post_type, $post->ID]);
-    }
+        global $algolia;
 
-    $index = $algolia->initIndex(
-        apply_filters('algolia_index_name', 'CAA-test')
-    );
+        $record = (array) apply_filters($post->post_type.'_to_record', $post);
 
-    if ('trash' == $post->post_status) {
-        $index->deleteObject($record['objectID']);
-    } else {
-        $index->saveObject($record);
-    }
+        if (!isset($record['objectID'])) {
+            $record['objectID'] = implode('#', [$post->post_type, $post->ID]);
+        }
 
-    return $post;
+        $index = $algolia->initIndex(
+            apply_filters('algolia_index_name', 'CAA-test')
+        );
+
+        if ('trash' == $post->post_status) {
+            $index->deleteObject($record['objectID']);
+        } else {
+            $index->saveObject(algolia_post_to_record($post));
+        }
+
+        algolia_post_to_record($post);
+
+    //}
 }
 
 function algolia_update_post_meta($meta_id, $object_id, $meta_key, $_meta_value) {

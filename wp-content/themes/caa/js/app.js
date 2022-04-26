@@ -2,10 +2,292 @@ $( document ).ready(function() {
     var isTouch = window.matchMedia("(pointer: coarse)").matches || 'ontouchstart' in window || navigator.msMaxTouchPoints;
     var isLightMode = true;
     var topbarH = 152;
-
     //var isOnce = true;
     //var navIsOpen = false;
 
+
+    const searchClient = algoliasearch(
+        'B98TMUO56H',
+        '8b48aaf35c4ae7c58ad17cf8f9ea5d9d'
+    );
+    
+    if($('.home-search-bar').length){
+        const search = instantsearch({
+            indexName: 'CAA-test',
+            searchClient,
+            routing: true,
+            urlSync: true
+        });
+
+        const searchBox = instantsearch.widgets.searchBox({
+            container: '#home-search-bar',
+            placeholder: 'Search for products',
+            searchAsYouType: false,
+            showReset: true,
+            showLoadingIndicator: true,
+        });
+
+        search.addWidgets([searchBox]);
+        
+        search.start();
+
+    }
+
+    if($('.ressources-search-bar').length){
+
+        const search = instantsearch({
+            indexName: 'CAA-test',
+            searchClient,
+            routing: true
+        });
+
+        const config = instantsearch.widgets.configure({
+            hitsPerPage: 8,
+            enablePersonalization: false
+        });
+        
+        const searchBox = instantsearch.widgets.searchBox({
+            container: '#ressources-search-bar',
+            placeholder: 'Search for products',
+            searchAsYouType: true,
+            showReset: true,
+            showLoadingIndicator: true,
+        })
+
+
+        // Create the render function
+        const renderInfiniteHits = (renderOptions, isFirstRender) => {
+            const {
+                hits,
+                widgetParams,
+                showPrevious,
+                isFirstPage,
+                showMore,
+                isLastPage,
+            } = renderOptions;
+    
+        if (isFirstRender) {
+            const list = document.createElement('div');
+            list.className = 'card-grid';
+    
+            const moreButton = document.createElement('button');
+            const moreButtonContainer = document.createElement('div'); 
+            moreButton.className = 'more-button';
+            moreButton.textContent = 'Show more';
+            moreButtonContainer.className = 'ressources-results__show-more';
+    
+            moreButton.addEventListener('click', () => {
+                showMore();
+            });
+    
+            widgetParams.container.appendChild(list);
+            moreButtonContainer.appendChild(moreButton)
+            widgetParams.container.appendChild(moreButtonContainer);
+        
+            return;
+        }
+        
+        widgetParams.container.querySelector('.more-button').disabled = isLastPage;
+    
+        widgetParams.container.querySelector('.card-grid').innerHTML = `
+            ${hits
+                .map(
+                    hit => {
+                        if(hit.postType === 'solutions'){
+                            return `
+                            <div class="card card--rounded card--solution card--yellow">
+                                <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
+                                <div class="card-in">
+                                    <header class="card__header">
+                                        <span class="card__type">
+                                            <span class="card__type__icon"></span>
+                                            <span class="card__type__name">${hit.postType}</span>
+                                        </span>
+                                    </header>
+                                    <div class="card__main">
+                                        <div class="card__main__top">
+                                            <h2 class="card__title"><span class="card__number">05</span>${hit.title}</h2>
+                                        </div>
+                                    </div>
+                                    <footer class="card__footer">
+                                        <ul class="card__tags">
+                                            ${hit.areas.map(area => `<li class="card__tag-item">${area}</li>`).join("")}
+                                        </ul>
+                                    </footer>
+                                </div>
+                            </div>
+                            `
+                        } else if(hit.postType === 'experts'){
+
+                            return `
+                            <div class="card card--expert">
+                                <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
+                                <div class="card-in">
+                                    <header class="card__header">
+                                        <span class="card__type">
+                                            <span class="card__type__icon"></span>
+                                            <span class="card__type__name">${hit.postType}</span>
+                                        </span>
+                                    </header>
+                                    <div class="card__main">
+                                        <div class="card__main__top">
+                                            <h2 class="card__title">${hit.title}</h2>
+                                            <p class="card__sub-title">Fondateur de projet Drawdown</p>
+                                        </div>
+                                        <div class="card__media">
+                                            <div class="card__img">
+                                                <img src="${hit.mainImage}" alt="">
+                                                <div class="img-cover" style="background-image: url(${hit.mainImage})"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <footer class="card__footer">
+                                        <ul class="card__tags">
+                                            ${hit.tags.map(tag => `<li class="card__tag-item">${tag}</li>`).join("")}
+                                        </ul>
+                                    </footer>
+                                </div>
+                            </div>`
+                        } else if(hit.postType === 'areas'){
+                            return `
+                            <div class="card card--field">
+                                <a href="${hit.url}" class="card__link" title="${hit.title}"><span><${hit.title}</span></a>
+                                <div class="card-in">
+                                    <header class="card__header">
+                                        <span class="card__type">
+                                            <span class="card__type__icon"></span>
+                                            <span class="card__type__name">${hit.postType}</span>
+                                        </span>
+                                    </header>
+                                    <div class="card__main">
+                                        <div class="card__main__top">
+                                            <h2 class="card__title"><span class="card__number">05</span>${hit.title}</h2>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            `
+                        } else if(hit.postType === 'post'){
+                            return `
+                            <div class="card card--news">
+                                <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
+                                <div class="card-in">
+                                    <header class="card__header">
+                                        <span class="card__type">
+                                            <span class="card__type__icon"></span>
+                                            <span class="card__type__name">actualites</span>
+                                        </span>
+                                        <span class="card__time">${hit.date}</span>
+                                    </header>
+                                    <div class="card__main">
+                        
+                                        <div class="card__main__top">
+                                            <h2 class="card__title">${hit.title}</h2>
+                                            <span class="card__read-more">Lire plus</span>
+                                        </div>
+                        
+                                    </div>
+                                    <footer class="card__footer">
+                                        <ul class="card__tags">
+                                            ${hit.areas.map(area => `<li class="card__tag-item">${area}</li>`).join("")}
+                                        </ul>
+                                    </footer>
+                                </div>
+                            </div>`
+                        } else if(hit.postType === 'partners'){
+                            return `
+                            <div class="card card--partner">
+                                <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
+                                <div class="card-in">
+                                    <header class="card__header">
+                                        <span class="card__type">
+                                            <span class="card__type__icon"></span>
+                                            <span class="card__type__name">${hit.postType}</span>
+                                        </span>
+                                    </header>
+                                    <div class="card__main">
+                                        <div class="card__main__top">
+                                            <h2 class="card__title">${hit.title}</h2>
+                                            <p class="card__sub-title">On the ground in over 90 countries - neutral, impartial, and independent - we are the International Committee of the Red Cross.</p>
+                                        </div>
+                                        <div class="card__media">
+                                            <div class="card--partner__logo">
+                                                <img src="${hit.partnerInfo.logoUrl}" alt="${hit.title}">
+                                            </div>
+                                            <div class="card__img">
+                                                <img src="${hit.mainImage}" alt="">
+                                                <div class="img-cover" style="background-image: url(${hit.mainImage})"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <footer class="card__footer">
+                                        <ul class="card__tags">
+                                            ${hit.sectors.map(sector => `<li class="card__tag-item">${sector}</li>`).join("")}
+                                        </ul>
+                                    </footer>
+                                </div>
+                            </div>`
+                        } else {
+                            return `<h3>${hit.postType} : ${hit.title}</h3>`
+                        }
+                        
+                    }
+
+                )
+                .join('')}
+            `;
+        };
+    
+        // Create the custom widget
+        const customInfiniteHits = instantsearch.connectors.connectInfiniteHits(
+            renderInfiniteHits
+        );
+    
+        const refListAreas = instantsearch.widgets.refinementList({
+            container: '.ref-list__list--areas',
+            attribute: 'areas',
+            sortBy: ['name:asc'],
+            //searchable: true,
+            limit: 1000
+        });
+
+        const refListSectors = instantsearch.widgets.refinementList({
+            container: '.ref-list__list--sectors',
+            attribute: 'sectors',
+            sortBy: ['name:asc'],
+            //searchable: true,
+            limit: 1000
+        });
+
+        const refListPostType = instantsearch.widgets.refinementList({
+            container: '.ref-list__list--post-type',
+            attribute: 'postType',
+            sortBy: ['name:asc'],
+            limit: 1000
+        });
+
+        const currentFilters = instantsearch.widgets.currentRefinements({
+            container: '.current-filters',
+        });
+
+        const clearRef = instantsearch.widgets.clearRefinements({
+            container: '.clear-all',
+            templates: {
+              resetLabel: 'Clear refinements',
+            },
+          });
+
+        // Instantiate the custom widget
+        search.addWidgets([config, searchBox, refListAreas, refListSectors, refListPostType, currentFilters, clearRef,
+            customInfiniteHits({
+            container: document.querySelector('.ressources-results')
+            })
+        ]);
+        
+        search.start();
+
+    }
 
     // TOPBAR
     // var topBarTransitionDuration = $('.top-bar').css('transition-duration').replace('s', '') * 1000;
@@ -92,7 +374,7 @@ $( document ).ready(function() {
         e.preventDefault();
         var thisHash = $(this).attr('href');
         //gsap.to(window, {duration: 1, scrollTo: thisHash});
-        gsap.to(window, {duration: 1, scrollTo: {y: thisHash, offsetY: topbarH - 1}, ease: Power3.easeOut });
+        gsap.to(window, {duration: 1, scrollTo: {y: thisHash, offsetY: topbarH - 2}, ease: Power3.easeOut });
     });
 
     $('.article .block[id]').each(function(){
@@ -149,6 +431,33 @@ $( document ).ready(function() {
 
     //// SLIDERS
 
+    // DROPDOWNS
+
+    $('.dropdown__trigger').on('click', function(){
+        var thisDropdown = $(this).parents('.dropdown');
+        var isClosed = thisDropdown.hasClass('dropdown--is-closed');
+        var thisDropdownContent = thisDropdown.find('.dropdown__content');
+        var dropDownH = thisDropdownContent.find('>div').outerHeight(true);
+    
+        if(isClosed){
+            $('.dropdown').removeClass('dropdown--is-open').addClass('dropdown--is-closed');
+            gsap.to($('.dropdown__content'), 1, {height: 0, ease: Expo.easeInOut});
+            gsap.to(thisDropdownContent, 1, {height: dropDownH + 'px', ease: Expo.easeInOut, onComplete: function(){
+                gsap.set(thisDropdownContent, {height: 'auto'});
+                ScrollTrigger.refresh();
+            }});
+
+
+            $(this).parents('.dropdown').removeClass('dropdown--is-closed').addClass('dropdown--is-open');
+    
+        } else {
+            gsap.to(thisDropdownContent, 1, {height: 0, ease: Expo.easeInOut, onComplete: function(){
+                ScrollTrigger.refresh();
+            }});
+            $(this).parents('.dropdown').removeClass('dropdown--is-open').addClass('dropdown--is-closed');
+        };
+    });
+
     // FOOTER
 
     gsap.from('.footer__contact', {
@@ -171,6 +480,8 @@ $( document ).ready(function() {
     });
 
     //// FOOTER
+
+
 
     function killAllScrollTrigger(){
         // let Alltrigger = ScrollTrigger.getAll();

@@ -1,7 +1,9 @@
 .block {
     grid-column-start: 1;
     grid-column-end: 8;
-    margin-bottom: $space-2xl;
+    //margin-bottom: $space-2xl;
+    margin-top: $space-2xl;
+    font-size: $fs-lg;
 
     &--hotspot,
     &--picture,
@@ -33,6 +35,19 @@
             
             color: $color-primary;
         }
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    p {
+        font-size: inherit;
+    }
+
+    em {
+        font-style: normal;
+        color: $primary-blue;
     }
 }
 

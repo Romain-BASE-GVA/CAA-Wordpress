@@ -1,0 +1,301 @@
+.ressources-top-search {
+    padding: 0 $gutter/2*3;
+}
+
+// .ressources-search-bar,
+// .current-filters {
+    
+// }
+
+.current-filters {
+    margin: 10px 0; 
+    height: 40px;
+}
+
+.ressources-search-bar form {
+    position: relative;
+    display: flex;
+    //background-color: red;
+    height: 60px;
+    border-radius: 60px;
+    overflow: hidden;
+    border: 1px solid $black;
+}
+
+.ressources-search-bar input {
+    flex: 1 1 100%;
+    padding: 0 0 0 $gutter/3;
+    font-size: $fs-md;
+    color: $primary-blue;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border: none;
+    @include transition;
+
+    &:focus {
+        background-color: rgba($primary-blue, .2);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: $black;
+    }
+
+}
+
+.ressources-search-bar .ais-SearchBox-submit {
+    flex: 0 0 80px;
+    border: none;
+    border-left: 1px solid $black;
+    background: $white;
+    padding: 0;
+    cursor: pointer;
+    @include transition;
+
+    svg {
+        width: 25px;
+        height: 25px;
+        margin-left: -4px;
+    }
+
+    path {
+        @include transition;
+    }
+
+    &:hover {
+        background-color: $primary-blue;
+
+        path {
+            fill: $white;
+        }
+    }
+}
+
+.ressources-search-bar .ais-SearchBox-reset {
+    position: absolute;
+    top: 0;
+    right: 80px;
+    width: 80px;
+    height: 100%;
+    border: none;
+    border-left: 1px solid $black;
+    background: $white;
+    cursor: pointer;
+    @include transition;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    path {
+        @include transition;
+    }
+
+    &:hover {
+        background-color: $primary-blue;
+
+        path {
+            fill: $white;
+        }
+    }
+}
+
+.ressources-results__show-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: $gutter;
+}
+
+
+
+.ressources-filters {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+
+    ul {
+        @include clean-list;
+    }
+}
+
+.ressources-filters__filters {
+    display: flex;
+    align-items: center;
+}
+
+.ref-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 55px;
+    margin-left: $gutter/3;
+    background-color: $lightest-grey;
+    border-radius: 55px;
+    padding: 0 $gutter/2;
+}
+
+.ref-list__title {
+    font-size: $fs-md;
+    font-family: $font-secondary;
+}
+
+.ref-list__list {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    width: auto;
+    padding: $gutter;
+    background-color: $lightest-grey;
+    border-radius: $gutter/2;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 5px, 0);
+    @include box-shadow(0);
+    z-index: 10;
+    @include transition;
+
+
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        height: 15px;
+        //background-color: red;
+    }
+
+    .ref-list:hover & {
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+        @include box-shadow;
+    }
+}
+
+.ais-RefinementList-item {
+    font-size: $fs-md;
+    margin-bottom: .3em;
+    cursor: pointer;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.ais-RefinementList-count {
+    display: none;
+}
+
+.ais-RefinementList-label {
+    display: flex;
+    align-items: center;
+}
+
+.ais-RefinementList-labelText {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    text-transform: capitalize;
+
+    &:before {
+        content: '';
+        display: block;
+        flex: 0 0 1em;
+        width: 1em;
+        height: 1em;
+        margin-right: 10px;
+        border-radius: 50%;
+        background-color: white;
+        @include transition;
+    }
+
+}
+
+.ais-RefinementList-checkbox {
+    display: none;
+
+    &:checked + {
+
+        .ais-RefinementList-labelText:before {
+            background-color: $primary-green;
+        }
+    }
+}
+
+.ais-CurrentRefinements-list {
+    @include clean-list;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ais-CurrentRefinements-item {
+    display: flex;
+    align-items: center;
+}
+
+.ais-CurrentRefinements-category {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 $gutter/2;
+    border-radius: 40px;
+    font-size: $fs-xs;
+    line-height: 40px;
+    color: white;
+    background-color: $primary-green;
+    margin-right: $gutter/3;
+
+    button {
+        border: none;
+        background-color: transparent;
+        color: $white;
+        cursor: pointer;
+        transform: translate3d(.75em, 0, 0);
+    }
+}
+
+.ais-CurrentRefinements-label {
+    display: none;
+}
+
+.grid-mode__button {
+	position: relative;
+	border: none;
+	background-color: #E5E5E5;
+	width: 60px;
+	height: 30px;
+	border-radius: 30px;
+	cursor: pointer;
+	
+	span {
+		display: block;
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		width: 26px;
+		height: 26px;
+		padding: 3px;
+		border-radius: 26px;
+		background-color: white;
+		@include transition(all, .25s);
+	}
+	
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+	
+	&--light span {
+		transform: translate3d(calc(100% + 4px), 0, 0);
+	}
+		
+	&--dark span {
+		transform: translate3d(0, 0, 0);
+	}	
+}

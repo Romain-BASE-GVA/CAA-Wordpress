@@ -16,9 +16,9 @@ class Algolia_Command {
   
         do {
             $posts = new WP_Query([
-                'posts_per_page' => 100,
+                'posts_per_page' => 1000,
                 'paged' => $paged,
-                'post_type' => array( 'solutions', 'events', 'experts', 'resources', 'experiences', 'post', 'partners' )
+                'post_type' => array( 'solutions', 'events', 'experts', 'resources', 'experiences', 'post', 'partners', 'areas' )
             ]);
   
             if (!$posts->have_posts()) {

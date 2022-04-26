@@ -21,8 +21,71 @@
     color: $primary-blue;
 }
 
-.quote__caption {
+.quote__caption,
+.super-quote__caption {
     font-weight: $regular;
     color: $black;
+}
+
+.super-quote {
+    display: flex;
+    align-items: stretch;
+    background-color: rgba($primary-blue, .2);
+    border-radius: $gutter / 2;
+    margin-bottom: $gutter;
+    overflow: hidden;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.super-quote__img {
+    position: relative;
+    flex: 1 0 300px;
+    width: 300px;
+    max-width: 300px;
+    min-height: 300px;
+    filter: grayscale(1);
+    @include transition;
+
+    .super-quote:hover & {
+        filter: grayscale(0);
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        @include img-cover;
+    }
+
+    .bg-img {
+        display: none;
+        @include bg-cover;
+    }
+
+    // .bg-img {
+    //     background-size: cover;
+
+    // }
+
+    @supports not (object-fit: contain) {
+        .bg-img {
+            display: block;
+        }
+
+        img {
+            display: none;
+        }
+    }
+}
+
+.super-quote__blockquote {
+    font-weight: $bold;
+    color: $primary-blue;
+    display: flex;
+    align-items: center;
 }
 

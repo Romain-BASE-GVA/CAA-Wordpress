@@ -8,6 +8,7 @@ require_once('functions/utils.php');
 require_once('functions/security.php');
 
 // Custom Post Type
+require_once('custom-post/custom-post-solution-areas.php');
 require_once('custom-post/custom-post-solutions.php');
 require_once('custom-post/custom-post-experts.php');
 require_once('custom-post/custom-post-partners.php');

@@ -39,6 +39,10 @@
             color: $primary-green;
         }
     }
+
+    + .block--ctas {
+        margin-top: $space-lg;
+    }
 }
 
 .ctas {
