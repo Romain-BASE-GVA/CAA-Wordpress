@@ -1,27 +1,16 @@
 <!doctype html>
-<html class="no-js" lang="">
-
-<head>
-  <meta charset="utf-8">
-  <title>CAA RESSOURCES</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="assets/css/main.min.css">
-
-</head>
-
-<body>    
-    <div class="top-bar top-bar--grey" style="opacity: 0">
+<html <?php language_attributes(); ?> class="no-js">
+  <head>
+    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/main.min.css">
+    <?php wp_head(); ?>
+  </head>
+  <body <?php body_class(); ?>>
+  <?php wp_body_open(); ?>
+    <div class="top-bar top-bar--grey">
         <div class="top-bar__main">
             <a href="#" class="top-bar__logo">
                 <svg class="main-logo main-logo--dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 639.05 174.44">
@@ -202,12 +191,3 @@
             </div>
         </div>
     </div>
-    <main style="height: 200vh">
-        <h1>Home</h1>
-        <div class="home-search-bar" id="home-search-bar"> </div>
-    </main>
-    
-  <script src="assets/js/main.min.js"></script>
-</body>
-
-</html>

@@ -130,12 +130,12 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 200px;
+    min-width: 200px;
     height: 55px;
     margin-left: $gutter/3;
     background-color: $lightest-grey;
     border-radius: 55px;
-    padding: 0 $gutter/2;
+    padding: 0 $gutter*2 0 $gutter/2;
 }
 
 .ref-list__title {
