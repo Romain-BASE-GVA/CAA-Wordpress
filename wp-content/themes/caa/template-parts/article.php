@@ -4,8 +4,10 @@
 
     <?php while( have_rows('content_block') ): the_row(); 
         $blockTitle = get_sub_field('block_title');
-        $blockHash = preg_replace('/[^A-Za-z0-9\-]/', '-',  strtolower($blockTitle));
-        $blockHash = str_replace('---', '-', $blockHash);
+        // $blockHash = preg_replace('/[^A-Za-z0-9\-]/', '-',  strtolower($blockTitle));
+        // $blockHash = str_replace('---', '-', $blockHash);
+        $blockHash = str_replace(array( '\'', '"', '?', ',' , ';', '<', '>', ' ' ), '-', strtolower($blockTitle));
+        $blockHash = str_replace('--', '', $blockHash);
     ?>
         
         <!-- BLOCK TITLE AND TEXT -->
@@ -55,7 +57,7 @@
         
         <!-- TIMELINE SLIDER -->
         <?php elseif( get_row_layout() == 'timeline_slider'): ?>
-
+            
             <?php get_template_part( 'template-parts/blocks/block-timeline', null, array(
                 'blockTitle' => $blockTitle,
                 'blockID' => $blockHash
@@ -70,7 +72,7 @@
             )  ); ?>
 
         <!-- QUOTE -->
-        <?php elseif( get_row_layout() == 'quote' ): ?> 
+        <?php elseif( get_row_layout() == 'quotes' ): ?> 
 
             <?php get_template_part( 'template-parts/blocks/block-super-quote', null, array(
                 'blockTitle' => $blockTitle,

@@ -1,15 +1,29 @@
 <section class="block block--ctas block--ctas--blue" id="<?php echo $args['blockID']; ?>">
     <h2 class="block__title hidden"><?php echo $args['blockTitle']; ?></h2>
+
+    <?php if( have_rows('download') ): ?>
+
     <ul class="ctas">
+
+        <?php while( have_rows('download') ): the_row(); 
+            $title = get_sub_field('download_title');
+            $desc = get_sub_field('download_description');
+            $file = get_sub_field('download_file');
+        ?>
+
         <li class="cta-item">
-            <h3 class="cta-item__title">Rapport bilan carbon</h3>
-            <p>Le rapport est une « photo » des émissions GES d’ALIMA qui servira référence pour identifier et mesurer les principales sources d’émissions de l’organisation et qui aidera à définir une stratégie.</p>
-            <a href="#" class="btn btn--regular btn--blue btn--rounded" title="Télecharger : Rapport bilan carbon">Télecharger</a>
+            <?php if($title): ?>
+                <h3 class="cta-item__title"><?php echo $title; ?></h3>
+            <?php endif; ?>
+            <?php if($desc): ?>
+                <p><?php echo $desc; ?></p>
+            <?php endif; ?>
+            <a href="<?php echo $file['url'] ?>" class="btn btn--regular btn--blue btn--rounded" title="Download : <?php echo $title; ?>">Download</a>
         </li>
-        <li class="cta-item">
-            <h3 class="cta-item__title">Rapport bilan carbon</h3>
-            <p>Le rapport est une « photo » des émissions GES d’ALIMA qui servira référence pour identifier et mesurer les principales sources d’émissions de l’organisation et qui aidera à définir une stratégie.</p>
-            <a href="#" class="btn btn--regular btn--blue btn--rounded" title="Télecharger : Rapport bilan carbon">Télecharger</a>
-        </li>
+
+        <?php endwhile; ?>
+
     </ul>
+
+    <?php endif; ?>
 </section>

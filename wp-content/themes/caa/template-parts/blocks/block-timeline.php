@@ -1,51 +1,32 @@
 <section class="block block--timeline" id="<?php echo $args['blockID']; ?>">
     <h2 class="block__title hidden"><?php echo $args['blockTitle']; ?></h2>
+    <?php if( have_rows('slide') ): ?>
+
     <div class="timeline-slider">
+
+        <?php while( have_rows('slide') ): the_row();
+            $time = get_sub_field('time');
+            $title = get_sub_field('title');
+            $content = get_sub_field('content');
+        ?>
+        
         <div class="timeline-slide timeline-slide--up">
             <div class="timeline-slide__in">
                 <div class="timeline-slide__content">
-                    <span class="timeline-slide__date">2019</span>
+                    <span class="timeline-slide__date"><?php echo $time; ?></span>
                     <div class="timeline-slide__text">
-                        <h3 class="timeline-slide__title">Lorem Ipsum</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aliquid molestiae fuga nisi minus? Eligendi voluptatum, facere sed eos qui vitae placeat, quaerat deserunt eveniet tempore praesentium, saepe nostrum impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia rerum nemo magnam placeat voluptatem voluptatibus fugit libero eum magni! Accusamus voluptatum molestiae temporibus esse provident adipisci recusandae delectus aliquid ea. Adipisicing elit. Officia rerum nemo magnam placeat voluptatem voluptatibus fugit libero eum magni! Accusamus voluptatum molestiae temporibus esse provident adipisci recusandae delectus aliquid ea.</p>
+                        <h3 class="timeline-slide__title"><?php echo $title; ?></h3>
+                        <div>
+                            <?php echo $content; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="timeline-slide timeline-slide--down">
-            <div class="timeline-slide__in">
-                <div class="timeline-slide__content">
-                    <span class="timeline-slide__date">2020</span>
-                    <div class="timeline-slide__text">
-                        <h3 class="timeline-slide__title">Lorem Ipsum</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aliquid molestiae fuga nisi minus? Eligendi voluptatum, facere sed eos qui vitae placeat, quaerat deserunt eveniet tempore praesentium, saepe nostrum impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia rerum nemo magnam placeat voluptatem voluptatibus fugit libero eum magni! Accusamus voluptatum molestiae temporibus esse provident adipisci recusandae delectus aliquid ea.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aliquid molestiae fuga nisi minus? Eligendi voluptatum, facere sed eos qui vitae placeat, quaerat deserunt eveniet tempore praesentium, saepe nostrum impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia rerum nemo magnam placeat voluptatem voluptatibus fugit libero eum magni! Accusamus voluptatum molestiae temporibus esse provident adipisci recusandae delectus aliquid ea.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-slide timeline-slide--up">
-            <div class="timeline-slide__in">
-                <div class="timeline-slide__content">
-                    <span class="timeline-slide__date">2021</span>
-                    <div class="timeline-slide__text">
-                        <h3 class="timeline-slide__title">Lorem Ipsum</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aliquid molestiae fuga nisi minus? Eligendi voluptatum, facere sed eos qui vitae placeat, quaerat deserunt eveniet tempore praesentium, saepe nostrum impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia rerum nemo magnam placeat voluptatem voluptatibus fugit libero eum magni! Accusamus voluptatum molestiae temporibus esse provident adipisci recusandae delectus aliquid ea.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-slide timeline-slide--down">
-            <div class="timeline-slide__in">
-                <div class="timeline-slide__content">
-                    <span class="timeline-slide__date">2022</span>
-                    <div class="timeline-slide__text">
-                        <h3 class="timeline-slide__title">Lorem Ipsum</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit aliquid molestiae fuga nisi minus? Eligendi voluptatum, facere sed eos qui vitae placeat, quaerat deserunt eveniet tempore praesentium, saepe nostrum impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia rerum nemo magnam placeat voluptatem voluptatibus fugit libero eum magni! Accusamus voluptatum molestiae temporibus esse provident adipisci recusandae delectus aliquid ea.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <?php endwhile; ?>
+
     </div>
+
+    <?php endif; ?>
 </section>
