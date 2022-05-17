@@ -2,15 +2,21 @@
     
 } 
 
-.header--article {
-    background-color: $lightest-grey;
-}
-
 .header--internal {
     @include grid;
     @include grid-column(12);
-    height: 100vh;
+    background-color: $lightest-grey;
+    min-height: 100vh;
     padding:  var(--top-bar-h) $gutter*3/2  $gutter*3/2  $gutter*3/2;
+
+    @media (max-width: $xl) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (max-width: $sm) {
+        padding:  var(--top-bar-h) $gutter/2  $gutter/2  $gutter/2;
+    }
 }
 
 .header--internal .header__media {
@@ -19,12 +25,23 @@
     grid-column-start: 1;
     grid-column-end: 5;
     //background-color: red;
+
+    @media (max-width: $xl) {
+        width: 50%;
+    }
+
+    @media (max-width: $sm) {
+        //width: 100%;
+        display: none;
+    }
 }
 
-.header--internal .header__img {
+.header--internal .header__img,
+.header--partners .header__img {
     position: relative;
     width: 100%;
-    background-color: red;
+    height: 100%;
+    //background-color: red;
 
     img,
     .bg-cover {
@@ -45,14 +62,14 @@
         @include bg-cover;
     }
 
-    @supports (aspect-ratio: 1/1.5) {
-        padding-top: unset;
-        aspect-ratio: 1/1.5;
-    }
+    // @supports (aspect-ratio: 1/1.5) {
+    //     padding-top: unset;
+    //     aspect-ratio: 1/1.5;
+    // }
 
-    @supports not (aspect-ratio: 1/1.5) {
-        padding-top: 150%;
-    }
+    // @supports not (aspect-ratio: 1/1.5) {
+    //     padding-top: 150%;
+    // }
 
     @supports not (object-fit: contain) {
         img {
@@ -63,28 +80,183 @@
             display: block;
         }
     }
+
+    @media (max-width: $xl) {
+        @supports (aspect-ratio: 1.5/1) {
+            padding-top: unset;
+            aspect-ratio: 1.5/1;
+        }
+
+        @supports not (aspect-ratio: 1/1.5) {
+            padding-top: 75%;
+        }
+    }
 }
 
 .header--internal .header__text {
     grid-column-start: 6;
     grid-column-end: 12;
     //background-color: blue;
+
+    // @media (max-width: $xl) {
+    //     grid-column-start: 1;
+    //     grid-column-end: 2;
+    // }
+}
+
+
+
+.header--internal .header__head {
+    font-size: $fs-2xl;
+    margin: 3em 0;
+
+    @media (max-width: $xl) {
+        font-size: $fs-xl;
+        margin: 2em 0;
+    }
 }
 
 .header--internal .header__title {
-    font-size: $fs-2xl;
-    font-weight: $bold;
-}
-
-.header--article .header__title {
     color: $primary-blue;
+    font-size: inherit;
+    font-weight: $bold;
+    margin-bottom: .5em;
 }
 
-.header--article .header__intro {
-    color: $black;
+.header--internal .header__intro {
+    color: inherit;
     font-size: $fs-lg;
-    font-weight: $bold;
+    font-weight: $regular;
     line-height: 1.43;
+
+    strong {
+        font-weight: $bold;
+    }
+
+    @media (max-width: $xl) {
+        font-size: $fs-md;
+    }
+
+    @media (max-width: $md) {
+        font-size: $fs-sm;
+    }
+}
+
+.header--white {
+    color: $black;
+    background-color: $white;
+}
+
+.header--beige {
+    color: $black;
+    background-color: $beige;
+}
+
+.header--grey {
+    color: $black;
+    background-color: $the-grey;
+}
+
+.header--teal {
+    color: $white;
+    background-color: $teal;
+}
+
+.header--yellow {
+    color: $black;
+    background-color: $yellow;
+}
+
+.header--green {
+    color: $black;
+    background-color: $green;
+}
+
+.header--orange {
+    color: $white;
+    background-color: $orange;
+}
+
+.header--purple {
+    color: $white;
+    background-color: $purple;
+}
+
+.header--digital-blue {
+    color: $white;
+    background-color: $digital-blue;
+}
+
+.header--light-blue {
+    color: $black;
+    background-color: $light-blue;
+}
+
+.header--pale-blue {
+    color: $black;
+    background-color: $pale-blue;
+}
+
+.header--pink {
+    color: $black;
+    background-color: $pink;
+}
+
+.header--pale-green {
+    color: $black;
+    background-color: $pale-green;
+}
+
+
+
+// .header--pink {
+//     color: $white;
+//     background-color: $pink;
+// }
+
+.header--solution {
+    .header__title {
+        color: inherit;
+    }
+}
+
+.breadcrumbs {
+    font-size: $fs-sm;
+
+    @media (max-width: $xl){
+        font-size: $fs-xs;
+    }
+} 
+
+.header__tags {
+    @include clean-list;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header__tag-item {
+    font-family: $font-secondary;
+    font-size: 2rem;
+    margin: 0 .5em .5em 0;
+    padding: .5em 1em;
+    white-space: nowrap;
+    border: 1px solid currentColor;
+    border-radius: 50px;
+
+    @media (max-width: $xl) {
+        font-size: $fs-xs;
+    }
+}
+
+.header--partners {
+    width: 100%;
+    height: calc(100vh/3*2);
+
+    .header__media {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 

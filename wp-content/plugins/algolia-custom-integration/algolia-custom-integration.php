@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:     Algolia Custom Integration
  * Description:     Add Algolia Search feature
@@ -17,7 +16,12 @@ require_once __DIR__ . '/api-client/autoload.php';
 
 global $algolia;
 
-$algolia = \Algolia\AlgoliaSearch\SearchClient::create("B98TMUO56H", "9be8a054d376f67fdee89d21a448f5c9");
+$whitelist = ['127.0.0.1', '::1', 'localhost', '', 'caa']; 
+$isLocalHost = in_array($_SERVER['REMOTE_ADDR'], $whitelist);
+$algoliaAppId = $isLocalHost ? 'B98TMUO56H' : 'H4335KHPRJ'; 
+$adminApiKey = $isLocalHost ? '9be8a054d376f67fdee89d21a448f5c9' : 'a36d6dcef4af00e247d7eff38344fd4d';
+
+$algolia = \Algolia\AlgoliaSearch\SearchClient::create($algoliaAppId, $adminApiKey);
 
 require_once __DIR__ . '/wp-cli.php';
 

@@ -1,11 +1,13 @@
-<?php if( have_rows('content_block') ): ?>
-
 <article class="article">
 
+<?php if( get_field('introduction') && 'partners' == get_post_type() ): ?>
+    <?php echo get_field('introduction') ?>
+<?php endif; ?>
+
+<?php if( have_rows('content_block') ): ?>
     <?php while( have_rows('content_block') ): the_row(); 
         $blockTitle = get_sub_field('block_title');
-        // $blockHash = preg_replace('/[^A-Za-z0-9\-]/', '-',  strtolower($blockTitle));
-        // $blockHash = str_replace('---', '-', $blockHash);
+        $hideTitle = get_sub_field('hide_block_title') ? ' hidden' : '';
         $blockHash = str_replace(array( '\'', '"', '?', ',' , ';', '<', '>', ' ' ), '-', strtolower($blockTitle));
         $blockHash = str_replace('--', '', $blockHash);
     ?>
@@ -15,6 +17,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-text', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash,
                 'content' => get_sub_field('content')
             ) ); ?>
@@ -24,6 +27,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-hotspot', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash,
                 'image' => get_sub_field('hotspot_image')
                 //'hotspot' => get_sub_field('hotspot')
@@ -34,6 +38,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-picture', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash,
                 'image' => get_sub_field('img_img')
             )  ); ?>
@@ -43,6 +48,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-grid-list', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash,
                 'type' => get_sub_field('title_type') == 'bubble' ? 'type-1' : 'type-2'
             )  ); ?>
@@ -52,6 +58,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-stats-slider', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
         
@@ -60,6 +67,7 @@
             
             <?php get_template_part( 'template-parts/blocks/block-timeline', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
         
@@ -68,6 +76,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-dropdown', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
 
@@ -76,6 +85,7 @@
 
             <?php get_template_part( 'template-parts/blocks/block-super-quote', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
             
@@ -84,6 +94,7 @@
             
             <?php get_template_part( 'template-parts/blocks/block-downloads', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
         
@@ -92,13 +103,22 @@
 
             <?php get_template_part( 'template-parts/blocks/block-find-out-more', null, array(
                 'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
+                'blockID' => $blockHash
+            )  ); ?>
+        
+        <!-- FIND OUT MORE -->
+        <?php elseif( get_row_layout() == 'featured' ): ?>     
+
+            <?php get_template_part( 'template-parts/blocks/block-featured', null, array(
+                'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
 
         <?php endif ?>
 
     <?php endwhile; ?>
-
+    <?php endif; ?>
 </article>
 
-<?php endif; ?>

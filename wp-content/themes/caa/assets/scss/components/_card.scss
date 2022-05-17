@@ -26,6 +26,22 @@
     }
 }
 
+.card--white {
+    background-color: $white;
+}
+
+.card--beige {
+    background-color: $beige;
+}
+
+.card--grey {
+    background-color: $the-grey;
+}
+
+.card--teal {
+    background-color: $teal;
+}
+
 .card--yellow {
     background-color: $yellow;
 
@@ -79,6 +95,22 @@
 
     .card__number {
         color: $pink;
+    }
+}
+
+.card--pale-blue {
+    background-color: $pale-blue;
+
+    .card__number {
+        color: $pale-blue;
+    }
+}
+
+.card--pale-green {
+    background-color: $pale-green;
+
+    .card__number {
+        color: $pale-green;
     }
 }
 
@@ -323,6 +355,7 @@
     font-family: $font-secondary;
     font-size: $fs-xs;
     margin-right: .25em;
+    margin-top: .25em;
     padding: .25em .5em;
     border: 1px solid black;
     border-radius: 5px;

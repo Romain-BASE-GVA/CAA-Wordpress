@@ -7,6 +7,8 @@
 	add_theme_support( 'post-thumbnails' );
 // // Définition des ID de pages pour un accès plus facile
 
+	// define('ID_RES', 220);
+
 	// define('ID_HOME', 6);
 	// define('ID_NEWS', 17);
 	// define('ID_PORTFOLIO', 155);

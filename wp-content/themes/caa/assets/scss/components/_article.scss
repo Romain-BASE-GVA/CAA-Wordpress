@@ -3,4 +3,13 @@
     @include grid;
     @include grid-column(8);
     grid-row-gap: unset;
+
+    @media (max-width: $xl) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // @media (max-width: $sm) {
+    //     font-size: $fs-lg;
+    // }
 }

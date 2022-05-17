@@ -54,6 +54,15 @@
         font-style: normal;
         color: $primary-blue;
     }
+
+    @media (max-width: $xxxl) {
+        font-size: $fs-md;
+    }
+
+    @media (max-width: $xxl) {
+        grid-column-end: 9;
+        font-size: $fs-sm;
+    }
 }
 
 .block__title {
@@ -61,4 +70,12 @@
     font-weight: $bold;
     color: $color-primary;
     margin-bottom: .75em;
+    
+    @media (max-width: $xxxl) {
+        font-size: $fs-lg;
+    }
+
+    // @media (max-width: $xxl) {
+    //     font-size: $fs-md;
+    // }
 }

@@ -1,5 +1,5 @@
 <section class="block block--hotspot" id="<?php echo $args['blockID']; ?>">
-    <h2 class="block__title hidden"><?php echo $args['blockTitle']; ?></h2>
+    <h2 class="block__title<?php echo $args['hideTitle']; ?>"><?php echo $args['blockTitle']; ?></h2>
     <div class="hotspot">
         <picture>
             <!--

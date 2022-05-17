@@ -33,3 +33,7 @@
 // Disable XML RPC
 	add_filter( 'xmlrpc_enabled', '__return_false' );
 	remove_action( 'wp_head', 'rsd_link' );
+
+// Remove SVG Junk from body opening
+
+remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );

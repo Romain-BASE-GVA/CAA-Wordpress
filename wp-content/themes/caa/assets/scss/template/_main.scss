@@ -1,3 +1,21 @@
 .main {
     padding-top: $space-2xl;
 }
+
+.page-content {
+    @include grid();
+    @include grid-column(12);
+    padding: 0 $gutter*3/2;
+
+    @media (max-width: $xl) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (max-width: $sm) {
+        padding: 0 $gutter/2;
+    }
+
+    
+    
+}

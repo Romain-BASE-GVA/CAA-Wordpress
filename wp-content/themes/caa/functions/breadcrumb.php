@@ -3,8 +3,14 @@
 =            BREADCRUMBS			            =
 =============================================*/
 
+$whitelist = ['127.0.0.1', '::1', 'localhost', '', 'caa']; 
+$isLocalHost = in_array($_SERVER['REMOTE_ADDR'], $whitelist);
+
+$aIndex = $isLocalHost ? 'CAA-test' : 'climat_action_accelerator_en';
+
 //  to include in functions.php
 function the_breadcrumb() {
+    global $aIndex;
 
     $sep = ' > ';
 
@@ -37,9 +43,13 @@ function the_breadcrumb() {
         if (is_single()) {
             global $post;
             $post_type = get_post_type_object($post->post_type);
-            echo $post_type->labels->singular_name;
+            echo '<a href="'. get_permalink( get_page_by_title( 'Resources' ) ) .'?'. $aIndex .'[refinementList][postType][0]='. $post_type->labels->name .'" title="">';
+            echo $post_type->labels->name;
+            echo '</a>';
             echo $sep;
+            echo '<strong>';
             the_title();
+            echo '</strong>';
         }
 	
 	// If the current page is a static page, show its title.

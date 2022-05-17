@@ -30,6 +30,10 @@
         background-color: $black;
     }
 
+    @media (max-width: $xl) {
+        display: none;
+    }
+
 }
 
 .side-nav__item {

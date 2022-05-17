@@ -1,5 +1,5 @@
 <section class="block block--grid-list" id="<?php echo $args['blockID']; ?>">
-    <h2 class="block__title hidden"><?php echo $args['blockTitle']; ?></h2>
+    <h2 class="block__title<?php echo $args['hideTitle']; ?>"><?php echo $args['blockTitle']; ?></h2>
     <?php if( have_rows('item') ): ?>
     <ul class="grid-list grid-list--<?php echo $args['type']; ?>">
         <?php while( have_rows('item') ): the_row(); 

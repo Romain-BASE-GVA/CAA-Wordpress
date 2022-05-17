@@ -20,6 +20,49 @@
         width: calc(25vw + #{$gutter/2});
         padding-right: #{$gutter/2*3};
     }
+
+    @media (max-width: $xxxl) {
+        font-size: $fs-3xl;
+    }
+
+    @media (max-width: $xxl) {
+        font-size: $fs-2xl;
+    }
+
+    @media (max-width: $xl) {
+        //font-size: $fs-xl;
+        width: 33vw;
+
+        &:last-child {
+            width: calc(33vw + #{$gutter/2});
+        }
+    }
+
+    @media (max-width: $lg) {
+        width: 55vw;
+
+        &:last-child {
+            width: calc(55vw + #{$gutter/2});
+        }
+    }
+
+    @media (max-width: $md) {
+        width: 70vw;
+        //padding-right: $gutter/2;
+
+        &:last-child {
+           width: calc(70vw + #{$gutter/2});
+        }
+    }
+
+    @media (max-width: $sm) {
+        //width: 70vw;
+        padding-right: $gutter/2;
+
+        &:last-child {
+           width: calc(70vw + #{$gutter});
+        }
+    }
 }
 
 .stat-slide__in {
@@ -94,6 +137,14 @@
 
 .stat-slide__title {
     font-size: $fs-lg;
+
+    @media (max-width: $xxxl) {
+        font-size: $fs-md;
+    }
+
+    @media (max-width: $xxl) {
+        font-size: $fs-sm;
+    }
 }
 
 .stat-slide__stat {
@@ -109,7 +160,12 @@
 .stat-slide__detail {
     font-size: $fs-md;
     font-weight: $medium;
-    p {
-        
+
+    @media (max-width: $xxxl) {
+        font-size: $fs-sm;
+    }
+
+    @media (max-width: $xxl) {
+        font-size: $fs-xs;
     }
 }

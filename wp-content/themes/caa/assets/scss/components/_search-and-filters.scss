@@ -8,8 +8,8 @@
 // }
 
 .current-filters {
-    margin: 10px 0; 
-    height: 40px;
+    margin: $gutter/3 0 0 0; 
+    min-height: 40px + $gutter/3;
 }
 
 .ressources-search-bar form {
@@ -232,11 +232,13 @@
     @include clean-list;
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .ais-CurrentRefinements-item {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .ais-CurrentRefinements-category {
@@ -250,6 +252,7 @@
     color: white;
     background-color: $primary-green;
     margin-right: $gutter/3;
+    margin-bottom: $gutter/3;
 
     button {
         border: none;

@@ -1,4 +1,7 @@
 <?php
+$whitelist = ['127.0.0.1', '::1', 'localhost', '', 'caa']; 
+$isLocalHost = in_array($_SERVER['REMOTE_ADDR'], $whitelist);
+$algoliaIndex = $isLocalHost ? 'CAA-test' : 'climat_action_accelerator_en';
 
 if (!(defined('WP_CLI') && WP_CLI)) {
     return;
@@ -7,7 +10,8 @@ if (!(defined('WP_CLI') && WP_CLI)) {
 class Algolia_Command {
     public function reindex_post($args, $assoc_args) {
         global $algolia;
-        $index = $algolia->initIndex('CAA-test');
+        global $algoliaIndex;
+        $index = $algolia->initIndex($algoliaIndex);
   
         $index->clearObjects()->wait();
   

@@ -1,34 +1,46 @@
 <?php
 
-$thePostTypes = array('post', 'areas', 'events', 'experts', 'partners', 'resources', 'solutions', 'experiences');
+$whitelist = ['127.0.0.1', '::1', 'localhost', '', 'caa']; 
+$isLocalHost = in_array($_SERVER['REMOTE_ADDR'], $whitelist);
+
+$aIndex = $isLocalHost ? 'CAA-test' : 'climat_action_accelerator_en';
 
 function algolia_post_to_record(WP_Post $post) {
+    $date = $post->post_type === 'events' ? get_field('event_date', $post->ID) : get_the_time('d.m.y', $post->ID);
     $tags = array_map(function (WP_Term $term) {
         return $term->name;
     }, wp_get_post_terms($post->ID, 'tags'));
-
-    // $fields = array_map(function (WP_Term $term) {
-    //     return $term->name;
-    // }, wp_get_post_terms($post->ID, 'field'));
-
-    $areas = get_field('solution_areas', $post->ID);
-    $relatedAreas = array();
-
-    if( $areas ):
-        foreach( $areas as $area ):
-            $areaTitle = get_the_title( $area->ID );
-            array_push($relatedAreas, $areaTitle);
-        endforeach;
-    endif;
 
     $sectors = array_map(function (WP_Term $term) {
         return $term->name;
     }, wp_get_post_terms($post->ID, 'sector'));
 
+    $areas = get_field('solution_areas', $post->ID);
+    $relatedAreas = array();
+    $bgColor;
+
+    if( $areas ):
+        foreach( $areas as $area ):
+
+            $areaTitle = get_the_title( $area->ID );
+            array_push($relatedAreas, $areaTitle);
+
+            if(get_field('color', $area->ID)):
+                $bgColor = get_field('color', $area->ID);
+            elseif( get_field('color', wp_get_post_parent_id($area->ID)) ):
+                $bgColor = get_field('color', wp_get_post_parent_id($area->ID));
+            else:
+                $bgColor = null;
+            endif;
+            
+        endforeach;
+    endif;
+
     $featured_img_url = get_the_post_thumbnail_url($post->ID, 'large');
     $introduction = get_field('introduction', $post->ID, false, false);
     $partnerLogo = get_field('partner_logo', $post->ID);
     $partnerLink = get_field('partner_link', $post->ID);
+    //$bgColor = get_field('color', $post->ID) || get_field('color', wp_get_post_parent_id($post->ID));
 
     $pageContent = '';
     //$blockContentField = get_field('content_block', $post->ID );
@@ -189,7 +201,7 @@ function algolia_post_to_record(WP_Post $post) {
         'objectID' => implode('#', [$post->post_type, $post->ID]),
         'postType' => $post->post_type,
         'title' => $post->post_title,
-        'date' => get_the_time('d.m.y', $post->ID),
+        'date' => $date,
         'partnerInfo' => array('logoUrl' => $partnerLogo['url'], 'linkTitle' => $partnerLink['title'], 'linkUrl' => $partnerLink['url']),
         'intro' => $introduction,
         'mainImage' => $featured_img_url,
@@ -198,43 +210,22 @@ function algolia_post_to_record(WP_Post $post) {
         'sectors' => $sectors,
         'url' => get_post_permalink($post->ID),
         'pageContent' => $pageContent,
+        'bgColor' => $bgColor
     ];
 }
 
-// function algolia_update_post($id, WP_Post $post, $update) {
-    
-//     if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
-//         return $post;
-//     }
-
-//     global $algolia;
-
-//     $record = (array) apply_filters($post->post_type.'_to_record', $post);
-
-//     if (!isset($record['objectID'])) {
-//         $record['objectID'] = implode('#', [$post->post_type, $post->ID]);
-//     }
-
-//     $index = $algolia->initIndex(
-//         apply_filters('algolia_index_name', 'CAA-test')
-//     );
-
-//     if ('trash' == $post->post_status) {
-//         $index->deleteObject($record['objectID']);
-//     } else {
-//         $index->saveObject($record);
-//     }
-
-//     return $post;
-// }
-
 function algolia_update_post($id, WP_Post $post, $update) {
+    global $aIndex;
+    $thePostTypes = array('post', 'areas', 'events', 'experts', 'partners', 'solutions', 'experiences');
+    $thisPostType = $post->post_type;
 
-    //if(in_array($post->post_type, $thePostTypes)) {
+    //if((in_array($thisPostType, $thePostTypes) || get_field('show_in_resources', $post->ID)) && $post->post_title != 'Auto Draft'){
+    if((in_array($thisPostType, $thePostTypes) || get_field('show_in_resources', $post->ID)) && $post->post_status !== 'auto-draft'){
 
-        if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
-            algolia_post_to_record($post);
-        }
+        // if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
+        // if (wp_is_post_revision($id) || wp_is_post_autosave($id)) {
+        //     algolia_post_to_record($post);
+        // }
 
         global $algolia;
 
@@ -245,7 +236,7 @@ function algolia_update_post($id, WP_Post $post, $update) {
         }
 
         $index = $algolia->initIndex(
-            apply_filters('algolia_index_name', 'CAA-test')
+            apply_filters('algolia_index_name', $aIndex)
         );
 
         if ('trash' == $post->post_status) {
@@ -256,16 +247,20 @@ function algolia_update_post($id, WP_Post $post, $update) {
 
         algolia_post_to_record($post);
 
-    //}
+        
+        
+
+    }
 }
 
 function algolia_update_post_meta($meta_id, $object_id, $meta_key, $_meta_value) {
     global $algolia;
+    global $aIndex;
     $indexedMetaKeys = ['seo_description', 'seo_title'];
 
     if (in_array($meta_key, $indexedMetaKeys)) {
         $index = $algolia->initIndex(
-            apply_filters('algolia_index_name', 'CAA-test')
+            apply_filters('algolia_index_name', $aIndex)
         );
 
         $index->partialUpdateObject([

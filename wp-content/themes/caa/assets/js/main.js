@@ -7,8 +7,11 @@
 //@prepros-append vendor/flickity.js
 //@prepros-append vendor/marquee3k.js
 //@prepros-append vendor/lazyload.js
+//@prepros-append vendor/plyr.js
 //@prepros-append vendor/algoliasearch-lite.umd.js
 //@prepros-append vendor/instantsearch.js
+//@prepros-append vendor/autocomplete-js.js
+//@prepros-append vendor/autocomplete-plugin-query-suggestions.js
 
 //@prepros-append app.js
 

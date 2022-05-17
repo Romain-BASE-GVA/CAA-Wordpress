@@ -15,7 +15,6 @@ require_once('custom-post/custom-post-solutions.php');
 require_once('custom-post/custom-post-experts.php');
 require_once('custom-post/custom-post-partners.php');
 require_once('custom-post/custom-post-successful-experiences.php');
-require_once('custom-post/custom-post-resources.php');
 require_once('custom-post/custom-post-events.php');
 require_once('custom-post/change-posts-post-type.php');
 

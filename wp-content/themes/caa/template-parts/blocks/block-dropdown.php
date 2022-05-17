@@ -1,5 +1,5 @@
 <section class="block block--dropdowns" id="<?php echo $args['blockID']; ?>">
-    <h2 class="block__title"><?php echo $args['blockTitle']; ?></h2>
+    <h2 class="block__title<?php echo $args['hideTitle']; ?>"><?php echo $args['blockTitle']; ?></h2>
     <?php if( have_rows('dropdown') ): ?>
 
     <div class="dropdowns">

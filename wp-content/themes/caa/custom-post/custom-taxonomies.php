@@ -77,7 +77,7 @@ function caa_custom_taxonomy_sector() {
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
 	);
-	register_taxonomy( 'sector', array( 'solutions', 'events', 'experiences', 'post', 'partners' ), $args );
+	register_taxonomy( 'sector', array( 'solutions', 'events', 'experiences', 'post', 'partners', 'page' ), $args );
 
 }
 
@@ -115,7 +115,7 @@ function caa_custom_taxonomy_tags() {
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
 	);
-	register_taxonomy( 'tags', array( 'solutions', 'events', 'experts', 'resources', 'experiences', 'post', 'partners' ), $args );
+	register_taxonomy( 'tags', array( 'solutions', 'events', 'experts', 'resources', 'experiences', 'post', 'partners', 'page' ), $args );
 
 }
 

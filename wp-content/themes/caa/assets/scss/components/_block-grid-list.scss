@@ -16,6 +16,12 @@
     width: calc(50% - #{$gutter / 2});
     max-width: calc(50% - #{$gutter / 2});
     margin-bottom: $gutter;
+
+    @media (max-width: $lg) {
+        flex: 1 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .grid-list__title {
@@ -36,10 +42,14 @@
     .grid-list--type-2 & {
         border-bottom: 1px solid currentColor;
     }
+
+    @media (max-width: $xxxl) {
+        font-size: $fs-lg;
+    }
 }
 
 .grid-list__content {
-    font-size: $fs-lg;
+    //font-size: $fs-lg;
 
     p {
 

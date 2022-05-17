@@ -1,6 +1,7 @@
 <footer class="footer">
     <div class="footer__contact">
         <h2 class="section__title">Faites partie du changement,<br> contactez-nous</h2>
+        <!--
         <form action="" class="footer__contact-form">
             <div>
                 <textarea id="w3review" name="w3review" rows="4" placeholder="Message"></textarea>
@@ -11,6 +12,10 @@
             </div>
             <div><button>Envoyer</button></div>
         </form>
+        -->
+        <div class="footer__contact-form">
+            <?php echo apply_shortcodes('[contact-form-7 id="28971" title="Footer Contact"]'); ?>
+        </div>
     </div>
     <div class="footer__nav">
         <div class="footer__wrapper">
