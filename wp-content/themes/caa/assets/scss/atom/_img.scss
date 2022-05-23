@@ -1,3 +1,18 @@
+img {
+    .dark-mode & {
+        filter: grayscale(1);
+        opacity: .5;
+    }
+}
+
 .img-cover {
     @include img-cover;
+}
+
+.lazy {
+    filter: blur(10px);
+
+    &.loaded {
+        filter: none;
+    }
 }

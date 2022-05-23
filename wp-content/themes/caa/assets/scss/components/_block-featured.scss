@@ -1,0 +1,16 @@
+.block--featured {
+    
+    .card {
+        width: 30%;
+        max-width: 30%;
+        flex: 0 0 30%;
+    }
+}
+
+.featured-grid {
+    @include clean-list;
+    padding: 3vw 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}

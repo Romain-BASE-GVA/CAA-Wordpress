@@ -1,0 +1,14 @@
+.team-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+
+}
+
+.team-member {
+    width: 100%;
+
+    img {
+        max-width: 100%;
+    }
+}

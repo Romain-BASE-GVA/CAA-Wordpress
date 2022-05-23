@@ -3,8 +3,8 @@
     padding: $gutter/2*3;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 40px;
-    grid-row-gap: 40px;
+    grid-column-gap: $gutter;
+    grid-row-gap: $gutter;
 
     @media (max-width: $xxxl) {
         grid-template-columns: repeat(4, 1fr);
@@ -15,6 +15,16 @@
     }
 
     @media (max-width: $lg) {
+        padding: $gutter;
         grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: $gutter;
+        grid-row-gap: $gutter;        
+    }
+
+    @media (max-width: $sm) {
+        padding: $gutter/3*2;
+        grid-template-columns: 1fr;
+        grid-column-gap: $gutter/3*2;
+        grid-row-gap: $gutter/3*2;        
     }
 }

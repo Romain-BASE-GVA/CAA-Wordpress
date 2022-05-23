@@ -10,17 +10,23 @@
         $featuredImgUrl = get_the_post_thumbnail_url($post->ID, 'large');
         $featuredImgAlt = get_post_meta ( $featureImgId, '_wp_attachment_image_alt', true );
 
-        foreach( $areas as $area ):
-            array_push($allTags, get_the_title( $area->ID ));
-        endforeach;
+        if($areas):
+            foreach( $areas as $area ):
+                array_push($allTags, get_the_title( $area->ID ));
+            endforeach;
+        endif;
 
-        foreach($sectors as $sector):
-            array_push($allTags, $sector->name);
-        endforeach;
+        if($sectors):
+            foreach($sectors as $sector):
+                array_push($allTags, $sector->name);
+            endforeach;
+        endif;
 
-        foreach($tags as $tag):
-            array_push($allTags, $tag->name);
-        endforeach;
+        if($tags):
+            foreach($tags as $tag):
+                array_push($allTags, $tag->name);
+            endforeach;
+        endif;
 
     ?>
 

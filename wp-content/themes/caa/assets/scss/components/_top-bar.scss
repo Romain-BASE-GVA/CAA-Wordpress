@@ -6,7 +6,7 @@
     //background-color: red;
     padding: 0 $gutter/4*3;
     @include transition;
-    z-index: 100;
+    z-index: 10000;
 }
 
 .top-bar--white {
@@ -81,7 +81,13 @@
         .main-logo__text {
             path {
                 fill: $black;
+
+                .dark-mode & {
+                    fill: $white;
+                }
             }
+
+
         }
     }
 

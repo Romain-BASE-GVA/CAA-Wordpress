@@ -19,6 +19,16 @@
     }
 }
 
+.btn--green {
+    color: $primary-green;
+    background-color: rgba($primary-green, .4);
+
+    &:hover {
+        color: white;
+        background-color: rgba($primary-green, 1);
+    }
+}
+
 .btn--rounded {
     border-radius: 15px;
 }

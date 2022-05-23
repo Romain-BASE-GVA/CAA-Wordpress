@@ -288,7 +288,7 @@ $( document ).ready(function() {
                                             <span class="card__type__icon"></span>
                                             <span class="card__type__name">${hit.postType}</span>
                                         </span>
-                                        <span class="card__time">${hit.date}</span>
+                                        ${hit.date ? `<span class="card__time">${hit.date}</span>` : ''}
                                     </header>
                                     <div class="card__main">
                         
@@ -479,6 +479,41 @@ $( document ).ready(function() {
 
     //// TOPBAR
 
+    // HEADER HOME
+    var el = $('.header__front li');
+    gsap.set(el.not(':first'), {autoAlpha:0, yPercent: 100, scale: .95});
+    var animHeader = new TimelineMax({repeat:0, delay: 1, repeatDelay: 0, onComplete: ()=>{animHeader.restart(true)} });
+    
+    for(var i=0;i<el.length;i++){
+      var E = el[i];
+        var nextE = el[i + 1];
+      // tl.to(E, 0.5, {yPercent: 0, autoAlpha:1, duration: .25, ease: Power2.easeOut})
+      //   .to(E, 0.5, {yPercent: -100, autoAlpha:0, duration: .25, ease:Power2.easeOut},'+=2.5')
+        
+        if(nextE){
+            animHeader.to(E, {scale: .95, yPercent: -100, autoAlpha:0, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 2*i)
+                                .to(nextE, {scale: 1, yPercent: 0, autoAlpha:1, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 2*i)
+        }
+        
+    
+    };
+    //// HEADER HOME
+
+    // CARD
+
+    $('.card__link').on('mouseenter', function(){
+        var thisCard = $(this).parent('.card');
+        console.log(thisCard);
+        thisCard.addClass('card--hover');
+    });
+
+    $('.card__link').on('mouseleave', function(){
+        var thisCard = $(this).parent('.card');
+        thisCard.removeClass('card--hover');
+    });
+
+    //// CARD
+
     // SIDE NAV
 
     $('.side-nav a').on('click', function(e){
@@ -580,6 +615,44 @@ $( document ).ready(function() {
         };
     });
 
+    // VIDEOS
+
+    const players = Array.from(document.querySelectorAll('.block--video__video')).map((p) => new Plyr(p));
+
+    $('.block--video__video button').on('click', function(e){
+        e.preventDefault();
+        var vidId = $(this).data('video-id');
+
+        var youtubeIframe = `<iframe class="block--video__iframe" type="text/html" width="720" height="405"
+        src="https://www.youtube.com/embed/${vidId}?modestbranding=1&playsinline=1&autoplay=1&color=white&iv_load_policy=3"
+        frameborder="0" allowfullscreen>`;
+
+        $(this).parent('.block--video__video').append(youtubeIframe);
+
+        $(this).remove();
+    });
+
+    // LAZY LOAD IMAGE
+
+    var lazyLoadInstance = new LazyLoad({
+        // Your custom settings go here
+    });
+
+    // FEATURED BLOCK / DRAGGABLE
+    $('.block--featured').each(function(){
+        var thisFeaturedBlock = $(this);
+        var thisCards = thisFeaturedBlock.find('.card');
+
+        thisCards.each(function(){
+            var rotation = randomNumBetween(-10,10);
+            $(this).css('transform', 'rotate('+ rotation +'deg)');
+        });
+    });
+
+    Draggable.create('.block--featured .card', {type:'x,y', edgeResistance:0.65, bounds:'.block--featured', inertia:true, zIndexBoost: true});
+
+    //// FEATURED BLOCK / DRAGGABLE
+
     // FOOTER
 
     gsap.from('.footer__contact', {
@@ -629,6 +702,10 @@ $( document ).ready(function() {
             links[i].addEventListener('click', cbk);
         }
     };
+
+    function randomNumBetween(min,max){
+        return Math.floor(Math.random()*(max-min+1)+min);
+    }
 
     function debounce(func, wait, immediate) {
         var timeout;

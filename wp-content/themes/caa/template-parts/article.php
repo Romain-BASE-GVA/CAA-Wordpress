@@ -115,10 +115,50 @@
                 'hideTitle' => $hideTitle,
                 'blockID' => $blockHash
             )  ); ?>
+        
+        <?php elseif( get_row_layout() == 'video' ): ?>     
+
+            <?php get_template_part( 'template-parts/blocks/block-video', null, array(
+                'blockTitle' => $blockTitle,
+                'hideTitle' => $hideTitle,
+                'blockID' => $blockHash
+            )  ); ?>
 
         <?php endif ?>
+        
+       
 
     <?php endwhile; ?>
+    <?php endif; ?>
+    <?php if( is_page_template( 'templates/page-the-climate-action-accelerator.php' ) ): ?>
+        <?php get_template_part( 'template-parts/team-members-loop' ); ?>
+
+        <?php if(have_rows('jobs')): ?>
+
+        <section class="block block--ctas block--ctas--green" id="jobs">
+            <h2 class="block__title hidden"><?php echo $args['blockTitle']; ?></h2>
+            <ul class="ctas">
+            <?php while( have_rows('jobs') ): the_row(); 
+                $title = get_sub_field('title');
+                $details = get_sub_field('details');
+                $file = get_sub_field('file');
+            ?>
+
+            <li class="cta-item">
+                <?php if($title): ?>
+                    <h3 class="cta-item__title"><?php echo $title; ?></h3>
+                <?php endif; ?>
+                <?php if($details): ?>
+                    <p><?php echo $details; ?></p>
+                <?php endif; ?>
+                <a href="<?php echo $file['url'] ?>" class="btn btn--regular btn--green btn--rounded" title="Postuler : <?php echo $title; ?>">Postuler</a>
+            </li>
+
+            <?php endwhile; ?>
+            </ul>
+        </section>
+        <?php endif; ?>
+
     <?php endif; ?>
 </article>
 

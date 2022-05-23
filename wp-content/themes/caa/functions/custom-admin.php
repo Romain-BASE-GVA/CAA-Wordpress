@@ -1,22 +1,20 @@
 <?php
 
-// Modification de l'URL de destination du logo de la page de login
-
-	function caa_custom_login_url() {
-	    return get_bloginfo('url');
-	}
-	add_filter('login_headerurl', 'caa_custom_login_url');
-
 // Modification du logo de la page de login
 
 	function caa_custom_login_image() {
 		echo "
 		<style>
 		body.login #login h1 a {
-			background: url('" . get_bloginfo('template_url') . "/assets/img/logo-t.png') center center no-repeat transparent;
+			background: url('" . get_bloginfo('template_url') . "/assets/img/logo-caa.svg') center center no-repeat transparent;
 		    background-size: contain;
 		    width: auto;
-			height: 320px;
+			//height: 320px;
+		}
+
+		#loginform {
+			border: none;
+			border-radius: 10px;
 		}
 		</style>";
 	}

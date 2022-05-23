@@ -9,6 +9,8 @@
             $title = get_sub_field('download_title');
             $desc = get_sub_field('download_description');
             $file = get_sub_field('download_file');
+            // $fileSize = filesize( get_attached_file( $file ) );
+            // $fileSize = size_format($file, 2);
         ?>
 
         <li class="cta-item">

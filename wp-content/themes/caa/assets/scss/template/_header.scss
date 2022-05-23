@@ -1,6 +1,72 @@
 .header {
+    overflow: hidden;
+    
+    .dark-mode & {
+        color: $white;
+        border-bottom: 1px solid currentColor;
+    }
     
 } 
+
+.header--home {
+    width: 100%;
+    height: 100vh;
+
+    h1 {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		color: white;
+		font-size: clamp(2.5rem,5vw,6rem);
+		line-height: 1;
+		margin-top: 0;
+		margin-bottom: .5em;
+        width: 100%;
+	}
+	
+	ul {
+		position: relative;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		height: 1.2em;
+		overflow: hidden;
+	}
+	
+	li {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		
+		// &:not(:first-child) {
+		// 	opacity: 0;
+		// 	visibility: hidden;
+		// }
+	}
+}
+
+.header--home .header__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.header__front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-search-bar {
+    display: flex;
+}
 
 .header--internal {
     @include grid;
@@ -16,6 +82,10 @@
 
     @media (max-width: $sm) {
         padding:  var(--top-bar-h) $gutter/2  $gutter/2  $gutter/2;
+    }
+
+    .dark-mode & {
+        background-color: $black;
     }
 }
 
@@ -37,7 +107,8 @@
 }
 
 .header--internal .header__img,
-.header--partners .header__img {
+.header--partners .header__img,
+.header--home .header__img {
     position: relative;
     width: 100%;
     height: 100%;
@@ -121,6 +192,10 @@
     font-size: inherit;
     font-weight: $bold;
     margin-bottom: .5em;
+
+    .dark-mode & {
+        color: $white;
+    }
 }
 
 .header--internal .header__intro {

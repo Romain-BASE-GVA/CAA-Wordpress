@@ -1,5 +1,13 @@
 .ressources-top-search {
     padding: 0 $gutter/2*3;
+
+    @media (max-width: $lg) {
+        padding: $gutter;
+    }
+
+    @media (max-width: $sm) {
+        padding: $gutter/3*2;     
+    }
 }
 
 // .ressources-search-bar,
@@ -20,6 +28,10 @@
     border-radius: 60px;
     overflow: hidden;
     border: 1px solid $black;
+
+    .dark-mode & {
+        border-color: $white;
+    }
 }
 
 .ressources-search-bar input {
@@ -38,7 +50,16 @@
     }
 
     &::placeholder {
-        color: $black;
+        color: rgba($black, .9);
+    }
+
+    .dark-mode & {
+        background-color: $black;
+        color: $white;
+
+        &::placeholder {
+            color: rgba($white, .9);
+        }
     }
 
 }
@@ -94,6 +115,15 @@
 
     &:hover {
         background-color: $primary-blue;
+
+        path {
+            fill: $white;
+        }
+    }
+
+    .dark-mode & {
+        background-color: $black;
+        border-left: 1px solid $white;
 
         path {
             fill: $white;

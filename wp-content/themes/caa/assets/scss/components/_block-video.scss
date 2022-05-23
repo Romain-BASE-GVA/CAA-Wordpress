@@ -1,0 +1,47 @@
+.block--video__video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.block--video__video--youtube {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: var(--plyr-color-main);
+        color: white;
+        border: none;
+        opacity: .9;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    svg {
+        width: 18px;
+        height: 18px;
+        margin-right: -3px;
+
+        path {
+            fill: currentColor;
+        }
+    }
+}
+
+.block--video__iframe {
+    width: 100%;
+    height: 100%;
+}
+

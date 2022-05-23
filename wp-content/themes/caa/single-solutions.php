@@ -11,29 +11,35 @@
         $featuredImgAlt = get_post_meta ( $featureImgId, '_wp_attachment_image_alt', true );
         $headerColor;
 
-        foreach( $areas as $area ):
+        if($areas):
+            foreach( $areas as $area ):
 
-            array_push($allTags, get_the_title( $area->ID ));
+                array_push($allTags, get_the_title( $area->ID ));
 
-            if(get_field('color', $area->ID)):
-                $headerColor = get_field('color', $area->ID);
-            elseif( get_field('color', wp_get_post_parent_id($area->ID)) ):
-                $headerColor = get_field('color', wp_get_post_parent_id($area->ID));
-            else:
-                $headerColor = null;
-            endif;
-        endforeach;
+                if(get_field('color', $area->ID)):
+                    $headerColor = get_field('color', $area->ID);
+                elseif( get_field('color', wp_get_post_parent_id($area->ID)) ):
+                    $headerColor = get_field('color', wp_get_post_parent_id($area->ID));
+                else:
+                    $headerColor = null;
+                endif;
+            endforeach;
+        endif;
 
         $headerColorClass = $headerColor != null ? 'header--' . $headerColor : ''; 
 
-        foreach($sectors as $sector):
-            array_push($allTags, $sector->name);
-        endforeach;
+        if($sectors):
+            foreach($sectors as $sector):
+                array_push($allTags, $sector->name);
+            endforeach;
+        endif;
 
-        foreach($tags as $tag):
-            array_push($allTags, $tag->name);
-        endforeach;
-
+        if($tags):
+            foreach($tags as $tag):
+                array_push($allTags, $tag->name);
+            endforeach;
+        endif;
+        
     ?>
 
         <header class="header header--internal header--solution <?php echo $headerColorClass; ?>">

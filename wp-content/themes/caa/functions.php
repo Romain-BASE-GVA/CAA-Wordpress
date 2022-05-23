@@ -8,6 +8,7 @@ require_once('functions/utils.php');
 require_once('functions/security.php');
 require_once('functions/shortcodes.php');
 require_once('functions/breadcrumb.php');
+require_once('functions/enqueue-scripts.php');
 
 // Custom Post Type
 require_once('custom-post/custom-post-solution-areas.php');
@@ -16,6 +17,7 @@ require_once('custom-post/custom-post-experts.php');
 require_once('custom-post/custom-post-partners.php');
 require_once('custom-post/custom-post-successful-experiences.php');
 require_once('custom-post/custom-post-events.php');
+require_once('custom-post/custom-post-team.php');
 require_once('custom-post/change-posts-post-type.php');
 
 // Custom Taxonomy Domains
