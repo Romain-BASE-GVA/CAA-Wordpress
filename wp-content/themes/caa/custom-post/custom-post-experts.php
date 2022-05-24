@@ -20,7 +20,7 @@ function caa_custom_post_types_experts() {
 		),
 		'menu_icon' => 'dashicons-businessperson',
 		'has_archive' => false,
-		'supports' => array( 'title', 'editor', 'thumbnail')
+		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions')
 		//'publicly_queryable'  => false
 	);
 

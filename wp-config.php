@@ -65,7 +65,7 @@ define( 'WP_CACHE_KEY_SALT', 'tkBn)~7Qv;SpMeI*g7Qc8rsb{b&y<.xG2;CM]uHq2tE=e.25[N
 $table_prefix = 'wp_';
 
 
-
+define('WP_POST_REVISIONS', true);
 
 /* That's all, stop editing! Happy publishing. */
 

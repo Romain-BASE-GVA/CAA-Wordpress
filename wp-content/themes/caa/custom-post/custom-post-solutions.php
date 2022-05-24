@@ -19,7 +19,7 @@ function caa_custom_post_types_solutions() {
 		),
 		'menu_icon' => 'dashicons-admin-page',
         'has_archive' => false,
-		'supports' => array( 'title', 'editor', 'thumbnail')
+		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions')
 	);
 
 	// Ajout du CPT

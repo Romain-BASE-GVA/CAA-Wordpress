@@ -5,6 +5,7 @@
     $aIndex = $isLocalHost ? 'CAA-test' : 'climat_action_accelerator_en';
 ?>
 <header class="header header--home">
+    <?php get_template_part( 'template-parts/topbar-news' ); ?>
     <?php 
         $homeGallery = array();
         $homeHeaderImages = get_field('header_images'); ?>
@@ -15,7 +16,8 @@
             array_push($homeGallery, $imageUrl);
         endforeach;
 
-        $theImage = $homeGallery[rand(0,4)];
+        $howManyImage = count( $homeHeaderImages ) - 1;
+        $theImage = $homeGallery[rand(0,$howManyImage)];
     ?>
     <div class="header__media">
         <div class="header__img">
@@ -29,13 +31,17 @@
         ?>
         <h1> 
             <?php echo $fixedText; ?>
-            <?php if(have_rows('rotating_text')): ?>
+            <?php if(have_rows('rotating_text')): 
+                $rows = get_field('rotating_text');
+            ?>
             <ul>
                 <?php while( have_rows('rotating_text') ): the_row(); 
                     $item = get_sub_field('item');
+                    
                 ?>
                     <li><?php echo $item; ?></li>
                 <?php endwhile; ?>
+                <li><?php echo $rows[0]['item']; ?></li>
             </ul>
             <?php endif; ?>
         </h1>
@@ -48,8 +54,65 @@
 
     <?php endif; ?>
 </header>  
-<main style="padding: 50vh 0 0 0;">
-    <h1>Home</h1>
+<main>
+<div class="section section--drop-card">
+    <?php
+        $featured_items = get_field('home_featured_items');
+    if( $featured_items ): ?>
+    
+    <?php foreach( $featured_items as $post ): 
+        setup_postdata($post); ?>
+        <a href="<?php the_permalink(); ?>" class="" title="<?php the_title(); ?>"><?php the_title(); ?></a>
+    <?php endforeach; ?>
+    <?php wp_reset_postdata(); endif;?>
+</div>
+<section class="section section--how">
+	<div class="section__head">
+		<h2 class="section__title">Nous vous accompagnons pour réduire de moitié votre empreinte carbone d'ici 2030. 
+			<span>Comment?</span>
+		</h2>
+	</div>
+	<div class="how-list">
+        <?php if(get_field('how_0_item')): ?>
+		<div class="how-list__item how-list__item--1">
+			<p><?php echo get_field('how_0_item'); ?></p>
+		</div>
+        <?php endif; ?>
+        <?php if(get_field('how_1_item')): ?>
+		<div class="how-list__item how-list__item--2">
+			<p><?php echo get_field('how_1_item'); ?></p>
+		</div>
+        <?php endif; ?>
+        <?php if(get_field('how_2_item')): ?>
+		<div class="how-list__item how-list__item--3">
+			<p><?php echo get_field('how_2_item'); ?></p>
+		</div>
+        <?php endif; ?>
+        <?php if(get_field('how_3_item')): ?>
+		<div class="how-list__item how-list__item--4">
+			<p><?php echo get_field('how_3_item'); ?></p>
+		</div>
+        <?php endif;?>
+		<div class="how-list__arrow how-list__arrow--1">
+			<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 446">
+				<!-- <rect class="cls-1" width="600" height="446"/> -->
+				<path class="cls-2" d="M19.5,436.87S231.07-223.77,580.5,97" transform="translate(0)"/>
+			</svg>
+		</div>
+		<div class="how-list__arrow how-list__arrow--2">
+			<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 446">
+				<!-- <rect class="cls-1" width="600" height="446"/> -->
+				<path class="cls-2" d="M19.5,436.87S231.07-223.77,580.5,97" transform="translate(0)"/>
+			</svg>
+		</div>
+		<div class="how-list__arrow how-list__arrow--3">
+			<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 446">
+				<!-- <rect class="cls-1" width="600" height="446"/> -->
+				<path class="cls-2" d="M19.5,436.87S231.07-223.77,580.5,97" transform="translate(0)"/>
+			</svg>
+		</div>
+	</div>
+</section>
 
     
 </main>

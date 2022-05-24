@@ -8,6 +8,7 @@
     font-family: $font-primary;
     //margin: 50px;
     @include box-shadow;
+    transition: transform .2s ease-in-out;
 
     @supports (aspect-ratio: 1/1.6) {
         padding-top: unset;
@@ -21,7 +22,9 @@
     }
 }
 
-
+.card--hover {
+    transform: scale(1.05) translate3d(0, 0, 0);
+}
 
 .card--rounded {
     border-radius: 20px;

@@ -33,6 +33,13 @@
         background-color: $lightest-grey;
         padding: 0;
     }
+
+    .dark-mode & {
+        .top-bar__main,
+        .top-bar__tools {
+            background-color: $black;
+        }
+    }
 }
 
 .top-bar__main {
@@ -97,6 +104,10 @@
                 fill: $white;
             }
         }
+    }
+
+    &__text {
+        @include transition;
     }
 }
 

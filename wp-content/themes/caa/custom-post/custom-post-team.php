@@ -16,7 +16,7 @@ function caa_custom_post_types_team() {
 		'labels'  => $labels,
 		'menu_icon' => 'dashicons-universal-access-alt',
 		'has_archive' => false,
-		'supports' => array( 'title', 'editor', 'thumbnail'),
+		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions'),
 		'publicly_queryable'  => false
 	);
 

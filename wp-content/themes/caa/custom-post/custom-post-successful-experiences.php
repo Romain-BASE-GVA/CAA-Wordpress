@@ -19,7 +19,7 @@ function caa_custom_post_types_successful_experiences() {
 		),
 		'menu_icon' => 'dashicons-star-filled',
         'has_archive' => false,
-		'supports' => array( 'title', 'editor', 'thumbnail')
+		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions')
 	);
 
 	// Ajout du CPT

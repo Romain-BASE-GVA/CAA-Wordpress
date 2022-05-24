@@ -1,5 +1,9 @@
 .footer {
 	background-color: $white;
+
+	.dark-mode & {
+		background-color: $black;
+	}
 }
 
 .footer__contact,
@@ -129,6 +133,12 @@ footer ul {
 		height: 50px;
 		background-color: white;
 		
+	}
+
+	.dark-mode & {
+		color: $white;
+		background-color: $black;
+		border: 1px solid $white;
 	}
 }
 

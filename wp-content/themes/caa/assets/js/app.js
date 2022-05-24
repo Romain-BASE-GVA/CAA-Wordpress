@@ -498,16 +498,31 @@ $( document ).ready(function() {
     
     };
     //// HEADER HOME
+    // HOME HOW
 
+    if($('.how-list').length){
+        let howToAnim = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.section--how',
+                start: 'top top',
+                //markers: true
+            }
+        });
+        
+        howToAnim	.from('.how-list__item', {autoAlpha: 0, stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to')
+                    .from('.how-list__arrow path', {autoAlpha: 0, drawSVG: '0%', stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to+=.1');
+    }
+
+    //// HOME HOW
     // CARD
 
-    $('.card__link').on('mouseenter', function(){
+    $('body').on('mouseenter', '.card__link', function(){
         var thisCard = $(this).parent('.card');
         console.log(thisCard);
         thisCard.addClass('card--hover');
     });
 
-    $('.card__link').on('mouseleave', function(){
+    $('body').on('mouseleave', '.card__link', function(){
         var thisCard = $(this).parent('.card');
         thisCard.removeClass('card--hover');
     });
@@ -676,6 +691,7 @@ $( document ).ready(function() {
 
     //// FOOTER
 
+    ScrollTrigger.refresh();
 
 
     function killAllScrollTrigger(){
