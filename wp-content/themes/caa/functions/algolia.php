@@ -2,8 +2,8 @@
 
 $whitelist = ['127.0.0.1', '::1', 'localhost', '', 'caa']; 
 $isLocalHost = in_array($_SERVER['REMOTE_ADDR'], $whitelist);
-
-$aIndex = $isLocalHost ? 'CAA-test' : 'climat_action_accelerator_en';
+$my_current_lang = ICL_LANGUAGE_CODE;
+$aIndex = $isLocalHost ? 'CAA-test' : $my_current_lang == 'en' ? 'climat_action_accelerator_en' : 'climat_action_accelerator_fr';
 
 function algolia_post_to_record(WP_Post $post) {
     $date = $post->post_type === 'events' ? get_field('event_date', $post->ID) : get_the_time('d.m.y', $post->ID);

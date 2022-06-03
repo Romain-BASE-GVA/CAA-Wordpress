@@ -8,6 +8,6 @@
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/main.min.css">
     <?php wp_head(); ?>
   </head>
-  <body <?php body_class(); ?>>
+  <body <?php body_class(); ?> data-lang="<?php echo apply_filters( 'wpml_current_language', null ); ?>">
   <?php wp_body_open(); ?>
     <?php get_template_part( 'template-parts/topbar' ); ?>

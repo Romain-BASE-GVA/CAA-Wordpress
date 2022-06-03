@@ -2,9 +2,10 @@ $( document ).ready(function() {
     var isTouch = window.matchMedia("(pointer: coarse)").matches || 'ontouchstart' in window || navigator.msMaxTouchPoints;
     var isLocalHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' || location.hostname === 'caa';
     var isLightMode = true;
+    var lang = $('body').data('lang');
     var topbarH = 152;
-    var aIndex =  isLocalHost ? 'CAA-test' : 'climat_action_accelerator_en';
-    var aIndexQuerySug = isLocalHost ? 'CAA-test_query_suggestions' : 'climat_action_accelerator_en_query_suggestions';
+    var aIndex =  isLocalHost ? 'CAA-test' : lang == 'en' ? 'climat_action_accelerator_en' : 'climat_action_accelerator_fr';
+    var aIndexQuerySug = isLocalHost ? 'CAA-test_query_suggestions' : lang == 'en' ? 'climat_action_accelerator_en_query_suggestions' : 'climat_action_accelerator_fr_query_suggestions';
     var algoliaAppID = isLocalHost ? 'B98TMUO56H' : 'H4335KHPRJ';
     var algoliaSearchApiKey =  isLocalHost ? '8b48aaf35c4ae7c58ad17cf8f9ea5d9d' : 'afed438caf6adb03b3cc1d6846418938';
     //var isOnce = true;
