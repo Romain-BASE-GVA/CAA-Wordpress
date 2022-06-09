@@ -17,8 +17,11 @@
         </div>
         <?php endif; wp_reset_postdata(); ?>
     </div>
+    <!--
     <div class="nl-sub">
         <div class="nl-sub__front">S’inscrire à la newsletter</div>
         <div class="nl-sub__back">cool</div>
     </div>
+    -->
+    <button class="nl-sub"><span>S’inscrire à la newsletter</span></button>
 </div>

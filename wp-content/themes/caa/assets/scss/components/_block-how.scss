@@ -76,11 +76,14 @@
 	}
 
     path {
+		--offset: 0;
         stroke: $white;
         stroke-linecap: round;
         stroke-miterlimit: 10;
         stroke-width: 5px;
         fill: none;
+		stroke-dasharray: 813;
+    	stroke-dashoffset: var(--offset);
     }
 }
 

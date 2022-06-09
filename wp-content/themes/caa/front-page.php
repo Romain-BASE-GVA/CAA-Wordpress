@@ -25,6 +25,7 @@
             <div class="bg-cover" style="background-image: url('<?php echo $theImage; ?>');"></div>
         </div>
     </div>
+    <?php endif; ?>
     <div class="header__front">
         <?php 
             $fixedText = get_field('fixed_text');
@@ -52,22 +53,15 @@
         </div>
     </div>
 
-    <?php endif; ?>
-</header>  
-<main>
-<div class="section section--drop-card">
-    <?php
-        $featured_items = get_field('home_featured_items');
-    if( $featured_items ): ?>
     
-    <?php foreach( $featured_items as $post ): 
-        setup_postdata($post); ?>
-        <a href="<?php the_permalink(); ?>" class="" title="<?php the_title(); ?>"><?php the_title(); ?></a>
-    <?php endforeach; ?>
-    <?php wp_reset_postdata(); endif;?>
-</div>
+</header>  
+<?php get_template_part( 'template-parts/popup-nl' ); ?>
+<main>
+
+<?php get_template_part( 'template-parts/drop-cards' ); ?>
+
 <section class="section section--how">
-	<div class="section__head">
+	<div class="section__header">
 		<h2 class="section__title">Nous vous accompagnons pour réduire de moitié votre empreinte carbone d'ici 2030. 
 			<span>Comment?</span>
 		</h2>
@@ -113,6 +107,10 @@
 		</div>
 	</div>
 </section>
+
+<?php get_template_part( 'template-parts/last-news-slider' ); ?>
+<?php get_template_part( 'template-parts/partners-slider' ); ?>
+
 
     
 </main>

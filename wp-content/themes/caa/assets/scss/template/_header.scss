@@ -68,7 +68,8 @@
 .home-search-bar {
     position: relative;
     display: flex;
-    width: 33%;
+    width: 100%;
+    max-width: 700px;
 
     .aa-InputWrapperPrefix {
         display: none;

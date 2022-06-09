@@ -1,0 +1,17 @@
+.card-drop-list {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	//overflow: hidden;
+	perspective: 2000px;
+	
+	.card {
+		width: 17.5vw;
+		position: absolute;
+        transition: none;
+		//background-color: white;
+	}
+}

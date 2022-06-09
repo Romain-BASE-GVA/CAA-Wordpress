@@ -1,0 +1,77 @@
+.slider {
+
+    .flickity-page-dots {
+        bottom: -60px;
+    }
+
+    .dot {
+        width: 250px;
+        height: 4px;
+        border-radius: 4px;
+    }
+}
+
+.slider--4-card {
+
+    .slide {
+        width: 25%;
+        padding: 20px;
+
+        @media screen and (max-width: $xxl) {
+            width: calc(100% / 3);
+        }
+
+        @media screen and (max-width: $lg) {
+            width: 50%;
+        }
+
+        @media screen and (max-width: $md) {
+            width: 75%;
+        }
+
+        @media screen and (max-width: $md) {
+            width: 100%;
+        }
+    }
+
+
+}
+
+.slider--5-card {
+
+    .slide {
+        width: 20%;
+        padding: 20px;
+
+        @media screen and (max-width: $xxl) {
+            width: 25%;
+        }
+
+        @media screen and (max-width: $xl) {
+            width: calc(100% / 3);
+        }
+
+        @media screen and (max-width: $lg) {
+            width: 50%;
+        }
+
+        @media screen and (max-width: $md) {
+            width: 75%;
+        }
+
+        @media screen and (max-width: $md) {
+            width: 100%;
+        }
+    }
+
+
+}
+
+.slider--last-news,
+.slider--partners {
+    
+}
+
+.slide {
+
+}

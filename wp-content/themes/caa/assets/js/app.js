@@ -4,6 +4,7 @@ $( document ).ready(function() {
     var isLightMode = true;
     var lang = $('body').data('lang');
     var topbarH = 152;
+    var popupNlIsOpen = false;
     var aIndex =  isLocalHost ? 'CAA-test' : lang == 'en' ? 'climat_action_accelerator_en' : 'climat_action_accelerator_fr';
     var aIndexQuerySug = isLocalHost ? 'CAA-test_query_suggestions' : lang == 'en' ? 'climat_action_accelerator_en_query_suggestions' : 'climat_action_accelerator_fr_query_suggestions';
     var algoliaAppID = isLocalHost ? 'B98TMUO56H' : 'H4335KHPRJ';
@@ -478,12 +479,25 @@ $( document ).ready(function() {
     Marquee3k.refreshAll();
 
 
+    $('.nl-sub').on('click', function(e){
+        e.preventDefault();
+        if(!popupNlIsOpen){
+            gsap.to($('.popup--newsletter'), {autoAlpha: 1, display: 'flex', onComplete: function(){popupNlIsOpen == true}});
+        } else {
+            gsap.to($('.popup--newsletter'), {autoAlpha: 0, display: 'none', onComplete: function(){popupNlIsOpen == false}});
+        }
+    });
+
+    $('.popup--newsletter .close-popup').on('click', function(e){
+        gsap.to($('.popup--newsletter'), {autoAlpha: 0, display: 'none', onComplete: function(){popupNlIsOpen == false}});
+    });
+
     //// TOPBAR
 
     // HEADER HOME
     var el = $('.header__front li');
     gsap.set(el.not(':first'), {autoAlpha:0, yPercent: 100, scale: .95});
-    var animHeader = new TimelineMax({repeat:0, delay: 1, repeatDelay: 0, onComplete: ()=>{animHeader.restart(true)} });
+    var animHeader = new TimelineMax({repeat:0, delay: 10, repeatDelay: 0, onComplete: ()=>{animHeader.restart(true)} });
     
     for(var i=0;i<el.length;i++){
       var E = el[i];
@@ -492,13 +506,62 @@ $( document ).ready(function() {
       //   .to(E, 0.5, {yPercent: -100, autoAlpha:0, duration: .25, ease:Power2.easeOut},'+=2.5')
         
         if(nextE){
-            animHeader.to(E, {scale: .95, yPercent: -100, autoAlpha:0, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 2*i)
-                                .to(nextE, {scale: 1, yPercent: 0, autoAlpha:1, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 2*i)
+            animHeader  .to(E, {scale: .95, yPercent: -100, autoAlpha:0, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 10*i)
+                        .to(nextE, {scale: 1, yPercent: 0, autoAlpha:1, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 10*i)
         }
         
     
     };
     //// HEADER HOME
+
+    // DROP CARDS
+
+    var rotationX = [];
+    var rotationY = [];
+    var duration = [];
+
+    initDrag();
+
+    let dropCard = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.section--drop-cards',
+            pin: true,   // pin the trigger element while active
+            start: "top top", // when the top of the trigger hits the top of the viewport
+            end: () => { return "+=" + window.innerHeight * 3}, // end after scrolling 500px beyond the start
+            scrub: 0,
+            onLeave: function (self) {
+                let start = self.start;
+                self.scroll(self.start);
+                self.disable();
+                self.animation.progress(1, true);
+                ScrollTrigger.refresh();
+                window.scrollTo(0, start);
+            }
+        }
+    });
+
+    $('.card-drop-list .card').each(function(i){
+        //var xPos = (100 / $('.card-drop-list .card').length) * i;
+        var xPos = randomNumBetween(1, 80);
+        var yPos = randomNumBetween(10, 60);
+        var rotation = randomNumBetween(-25,25);
+        
+        rotationX.push(randomNumBetween(-80,80))
+        rotationY.push(randomNumBetween(-80,80))
+        duration.push(randomNumBetween(.5,1.5))
+        
+        gsap.set($(this), {left: xPos + '%', top: yPos + 'vh', rotate: rotation});
+    });
+    
+    dropCard	.from('.card-drop-list .card', {scale: 2, 'border-width': '0.05vw', rotateX: (i)=>rotationX[i], rotateY: (i)=>rotationY[i], duration: 1, ease: Power3.easeIn, stagger: .4}, 'start')
+                .from('.card-drop-list .card', {autoAlpha: 0, duration: .5, ease: Power3.easeIn, stagger: .4}, 'start')
+                .from('.card-drop-list .card', {filter: 'blur(10px)', duration: 1, ease: Power3.easeIn, stagger: .4}, 'start');
+
+    function initDrag(){
+        Draggable.create('.section--drop-cards .card', {type:'x,y', edgeResistance:0.65, bounds:'.section--drop-cards', inertia:true})
+    };
+
+    //// DROP CARDS
     // HOME HOW
 
     if($('.how-list').length){
@@ -511,7 +574,7 @@ $( document ).ready(function() {
         });
         
         howToAnim	.from('.how-list__item', {autoAlpha: 0, stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to')
-                    .from('.how-list__arrow path', {autoAlpha: 0, drawSVG: '0%', stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to+=.1');
+                    .from('.how-list__arrow path', {autoAlpha: 0, '--offset': 813, stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to+=.1');
     }
 
     //// HOME HOW
@@ -570,6 +633,27 @@ $( document ).ready(function() {
     //// SIDE NAV
 
     // SLIDERS
+
+        // SLIDER LAST NEWS
+
+        var lastNewsSlider = $('.slider--last-news').flickity({
+            // options
+            cellAlign: 'left',
+            contain: true,
+            prevNextButtons: false,
+            pageDots: true
+        });
+
+        // SLIDER PARTNERS
+
+        var partnersSlider = $('.slider--partners').flickity({
+            // options
+            cellAlign: 'left',
+            contain: true,
+            prevNextButtons: false,
+            pageDots: true
+        });
+
         // SLIDER STAT
 
         $('.stats-slider').each(function(){
