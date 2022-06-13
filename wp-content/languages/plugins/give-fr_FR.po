@@ -2,14 +2,22 @@
 # This file is distributed under the same license as the Plugins - GiveWP &#8211; Donation Plugin and Fundraising Platform - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-04-06 19:39:13+0000\n"
+"PO-Revision-Date: 2022-04-29 15:10:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/3.0.0-rc.3\n"
+"X-Generator: GlotPress/3.0.0\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - GiveWP &#8211; Donation Plugin and Fundraising Platform - Stable (latest release)\n"
+
+#: src/Log/ValueObjects/LogType.php:55
+msgid "Debug"
+msgstr "Déboguer"
+
+#: includes/admin/tools/views/html-admin-page-system-info.php:800
+msgid "Free addon"
+msgstr "Modules gratuits"
 
 #: src/PaymentGateways/Stripe/Repositories/Settings.php:51
 msgid "Invalid Stripe account id."
@@ -30,6 +38,10 @@ msgstr "L’Id de la commande PayPal est manquant."
 #: src/PaymentGateways/Gateways/Stripe/Actions/GetOrCreateStripeCustomer.php:48
 msgid "Stripe Customer ID: %s"
 msgstr "ID client Stripe : %s"
+
+#: src/LegacySubscriptions/includes/give-subscriptions-api.php:264
+msgid "No subscriptions found!"
+msgstr "Aucun abonnement trouvé"
 
 #: src/Views/Form/Templates/Legacy/Legacy.php:22
 msgid "Legacy Form"
@@ -52,6 +64,24 @@ msgid "{name}, your contribution means a lot and will be put to good use in maki
 msgstr ""
 "{name}, ta contribution nous aidera et sera utilisée avec bon escient.\n"
 "Nous t'avons envoyé le récépissé à ton adresse : {donor_email}."
+
+#: src/DonationSummary/resources/views/summary.php:21
+#: src/Views/Form/Templates/Classic/optionConfig.php:197
+#: src/Views/Form/Templates/Sequoia/optionConfig.php:220
+msgid "Donation Summary"
+msgstr "Résumé du don"
+
+#: src/DonationSummary/resources/views/summary.php:43
+msgid "Payment Amount"
+msgstr "Montant du paiement"
+
+#: src/DonationSummary/resources/views/summary.php:53
+msgid "Giving Frequency"
+msgstr "Fréquence du don"
+
+#: src/DonationSummary/resources/views/summary.php:77
+msgid "One time"
+msgstr "Une fois"
 
 #: src/Views/Form/Templates/Sequoia/optionConfig.php:42
 msgid "Montserrat Google Font"

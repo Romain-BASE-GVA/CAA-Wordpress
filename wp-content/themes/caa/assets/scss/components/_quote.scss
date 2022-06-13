@@ -13,6 +13,14 @@
         background-color: rgba($primary-blue, .2);
         border-radius: $gutter / 2;
     }
+
+    + .quote {
+        margin-top: $gutter*2;
+
+        @media (max-width: $xl) {
+            margin-top: ($gutter/2) * 3;
+        }
+    }
 }
 
 .quote__blockquote {

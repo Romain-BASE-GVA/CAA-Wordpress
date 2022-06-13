@@ -206,6 +206,11 @@
         transform: translate3d(0, 0, 0);
         @include box-shadow;
     }
+
+    .dark-mode & {
+        border: 1px solid $white;
+        background-color: $black;
+    }
 }
 
 .ais-RefinementList-item {
@@ -241,8 +246,13 @@
         height: 1em;
         margin-right: 10px;
         border-radius: 50%;
-        background-color: white;
+        background-color: $white;
         @include transition;
+
+        .dark-mode & {
+            border: 1px solid $white;
+            background-color: $black;
+        }
     }
 
 }
@@ -254,6 +264,10 @@
 
         .ais-RefinementList-labelText:before {
             background-color: $primary-green;
+
+            .dark-mode & {
+                background-color: $white;
+            }
         }
     }
 }

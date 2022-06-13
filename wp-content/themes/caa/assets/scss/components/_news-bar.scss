@@ -60,6 +60,19 @@
     }
 }
 
+.news-bar__marquee {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 50%, 0);
+    @include transition;
+
+    &.is-init {
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
 .nl-sub {
     position: relative;
     display: flex;
@@ -70,7 +83,11 @@
     border: none;
     background-color: $primary-blue;
     color: $white;
-    pointer-events: cursor;
+    cursor: pointer;
+
+    .dark-mode & {
+        background-color: $black;
+    }
 }
 
 .nl-sub__front,

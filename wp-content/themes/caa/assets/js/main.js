@@ -10,6 +10,7 @@
 //@prepros-append vendor/marquee3k.js
 //@prepros-append vendor/lazyload.js
 //@prepros-append vendor/plyr.js
+//@prepros-append vendor/js-cookie.js
 //@prepros-append vendor/algoliasearch-lite.umd.js
 //@prepros-append vendor/instantsearch.js
 //@prepros-append vendor/autocomplete-js.js

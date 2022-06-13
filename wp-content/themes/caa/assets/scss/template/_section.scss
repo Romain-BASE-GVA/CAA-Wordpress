@@ -7,6 +7,10 @@
 .section--drop-cards,
 .section--how {
     padding: $space-2xl $gutter;
+
+    .dark-mode & {
+        border: 1px solid $white;
+    }
 }
 
 .section--drop-cards {
@@ -23,6 +27,7 @@
 
     a {
         display: flex;
+        align-items: center;
         font-size: $fs-md;
         margin-top: 1em;
 
@@ -47,6 +52,10 @@
         &:hover:after {
             transform: translateX(.5em);
         }
+    }
+
+    .dark-mode & {
+        color: $white;
     }
 }
 

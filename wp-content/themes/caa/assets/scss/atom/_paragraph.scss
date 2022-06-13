@@ -6,6 +6,10 @@ p {
     &:only-child {
         margin: 0;
     }
+
+    .dark-mode & {
+        color: $white;
+    }
 }
 
 .big-text {
@@ -13,4 +17,8 @@ p {
     font-weight: $medium;
     line-height: 1.06;
     color: $primary-blue;
+
+    .dark-mode & {
+        color: $white;
+    }
 }

@@ -17,11 +17,21 @@
     max-width: calc(50% - #{$gutter / 2});
     margin-bottom: $gutter;
 
-    @media (max-width: $lg) {
-        flex: 1 0 100%;
-        width: 100%;
-        max-width: 100%;
+    .block--grid-list--with-bg & {
+        color: $white;
+        background-color: $primary-blue;
+        padding: $gutter $gutter 20%;
+
+        @media (max-width: $lg) {
+            flex: 1 0 100%;
+            width: 100%;
+            max-width: 100%;
+            padding: $gutter/2 $gutter/2 20%;
+            margin-bottom: $gutter/2;
+        }
     }
+
+
 }
 
 .grid-list__title {
@@ -43,8 +53,17 @@
         border-bottom: 1px solid currentColor;
     }
 
+    .block--grid-list--with-bg & {
+        color: $white;
+        font-weight: $bold;
+        border: none;
+        padding-bottom: 0;
+        margin-bottom: 1em;
+    }
+
     @media (max-width: $xxxl) {
         font-size: $fs-lg;
+        
     }
 }
 

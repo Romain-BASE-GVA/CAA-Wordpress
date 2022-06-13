@@ -1,69 +1,82 @@
-$( document ).ready(function() {
+$(document).ready(function () {
     var isTouch = window.matchMedia("(pointer: coarse)").matches || 'ontouchstart' in window || navigator.msMaxTouchPoints;
     var isLocalHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '' || location.hostname === 'caa';
-    var isLightMode = true;
+    var lightMode = Cookies.get('lightMode') ? Cookies.get('lightMode') : 'light';
     var lang = $('body').data('lang');
     var topbarH = 152;
     var popupNlIsOpen = false;
-    var aIndex =  isLocalHost ? 'CAA-test' : lang == 'en' ? 'climat_action_accelerator_en' : 'climat_action_accelerator_fr';
+    var aIndex = isLocalHost ? 'CAA-test' : lang == 'en' ? 'climat_action_accelerator_en' : 'climat_action_accelerator_fr';
     var aIndexQuerySug = isLocalHost ? 'CAA-test_query_suggestions' : lang == 'en' ? 'climat_action_accelerator_en_query_suggestions' : 'climat_action_accelerator_fr_query_suggestions';
     var algoliaAppID = isLocalHost ? 'B98TMUO56H' : 'H4335KHPRJ';
-    var algoliaSearchApiKey =  isLocalHost ? '8b48aaf35c4ae7c58ad17cf8f9ea5d9d' : 'afed438caf6adb03b3cc1d6846418938';
+    var algoliaSearchApiKey = isLocalHost ? '8b48aaf35c4ae7c58ad17cf8f9ea5d9d' : 'afed438caf6adb03b3cc1d6846418938';
     //var isOnce = true;
     //var navIsOpen = false;
+    
+
+    
+
+    // if(isLightMode != 'true'){
+    //     console.log('DARK');
+    //     $('body').addClass('dark-mode');
+    //     $('.color-mode__button').removeClass('color-mode__button--light').addClass('color-mode__button--dark');
+    // } else {
+    //     console.log('LIGHT');
+    //     $('body').removeClass('dark-mode');
+    //     $('.color-mode__button').addClass('color-mode__button--light').removeClass('color-mode__button--dark');
+    // }
 
     const searchClient = algoliasearch(
         algoliaAppID,
         algoliaSearchApiKey
     );
 
-    if($('.home-search-bar').length){
+    if ($('.home-search-bar').length) {
         var theTextQuery = '';
 
         const { autocomplete } = window['@algolia/autocomplete-js'];
         const { createQuerySuggestionsPlugin } = window['@algolia/autocomplete-plugin-query-suggestions'];
-        
+
         const querySuggestionsPlugin = createQuerySuggestionsPlugin({
             searchClient,
             indexName: aIndexQuerySug,
-            onSelect: (query) => {console.log(query)},
+            onSelect: (query) => { console.log(query) },
             getSearchParams() {
                 return {
                     hitsPerPage: 10,
                 };
             },
         });
-        
+
         const autocompleteSearch = autocomplete({
-          container: '.home-search-bar__input',
-          placeholder: 'Search',
-          openOnFocus: false,
-          plugins: [querySuggestionsPlugin],
-          onStateChange({ state }) {
-            theTextQuery = state.query;
-          },
+            container: '.home-search-bar__input',
+            placeholder: 'Search',
+            openOnFocus: false,
+            plugins: [querySuggestionsPlugin],
+            onStateChange({ state }) {
+                theTextQuery = state.query;
+            },
         });
 
-        $('.home-search-bar__submit').on('click', function(e){
+        $('.home-search-bar__submit').on('click', function (e) {
             e.preventDefault();
             var baseUrl = $(this).attr('href');
             var endUrl = baseUrl + theTextQuery;
-    
-            if(theTextQuery != ''){
+
+            if (theTextQuery != '') {
                 console.log(endUrl);
                 window.location = endUrl;
             }
         });
-    
-        $('body').find('.home-search-bar__input input').keypress(function(e){
-            
-            if(e.originalEvent.key == 'Enter'){
+
+        $('body').find('.home-search-bar__input input').keypress(function (e) {
+
+            if (e.originalEvent.key == 'Enter') {
                 $('.home-search-bar__submit').trigger('click');
             }
         });
     }
 
-    if($('.ressources-search-bar').length){
+    if ($('.ressources-search-bar').length) {
 
         const search = instantsearch({
             indexName: aIndex,
@@ -75,7 +88,7 @@ $( document ).ready(function() {
             hitsPerPage: 10,
             enablePersonalization: false
         });
-        
+
         const searchBox = instantsearch.widgets.searchBox({
             container: '#ressources-search-bar',
             placeholder: 'Search for products',
@@ -84,8 +97,8 @@ $( document ).ready(function() {
             showLoadingIndicator: true,
         })
 
-        search.on('render', function() {
-            console.log('COOL');   
+        search.on('render', function () {
+            console.log('COOL');
             setTimeout(() => {
                 ScrollTrigger.refresh();
             }, 500);
@@ -101,36 +114,36 @@ $( document ).ready(function() {
                 showMore,
                 isLastPage,
             } = renderOptions;
-    
-        if (isFirstRender) {
-            const list = document.createElement('div');
-            list.className = 'card-grid';
-    
-            const moreButton = document.createElement('button');
-            const moreButtonContainer = document.createElement('div'); 
-            moreButton.className = 'more-button';
-            moreButton.textContent = 'Show more';
-            moreButtonContainer.className = 'ressources-results__show-more';
-    
-            moreButton.addEventListener('click', () => {
-                showMore();
-            });
-    
-            widgetParams.container.appendChild(list);
-            moreButtonContainer.appendChild(moreButton)
-            widgetParams.container.appendChild(moreButtonContainer);
-        
-            return;
-        }
-        
-        widgetParams.container.querySelector('.more-button').disabled = isLastPage;
-    
-        widgetParams.container.querySelector('.card-grid').innerHTML = `
+
+            if (isFirstRender) {
+                const list = document.createElement('div');
+                list.className = 'card-grid';
+
+                const moreButton = document.createElement('button');
+                const moreButtonContainer = document.createElement('div');
+                moreButton.className = 'more-button';
+                moreButton.textContent = 'Show more';
+                moreButtonContainer.className = 'ressources-results__show-more';
+
+                moreButton.addEventListener('click', () => {
+                    showMore();
+                });
+
+                widgetParams.container.appendChild(list);
+                moreButtonContainer.appendChild(moreButton)
+                widgetParams.container.appendChild(moreButtonContainer);
+
+                return;
+            }
+
+            widgetParams.container.querySelector('.more-button').disabled = isLastPage;
+
+            widgetParams.container.querySelector('.card-grid').innerHTML = `
             ${hits
-                .map(
-                    hit => {
-                        if(hit.postType === 'solutions'){
-                            return `
+                    .map(
+                        hit => {
+                            if (hit.postType === 'solutions') {
+                                return `
                             <div class="card card--rounded card--solution card--${hit.bgColor}">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -153,8 +166,8 @@ $( document ).ready(function() {
                                 </div>
                             </div>
                             `
-                        } else if(hit.postType === 'page'){
-                            return `
+                            } else if (hit.postType === 'page') {
+                                return `
                             <div class="card">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -177,8 +190,8 @@ $( document ).ready(function() {
                                 </div>
                             </div>
                             `
-                        } else if(hit.postType === 'experiences'){
-                            return `
+                            } else if (hit.postType === 'experiences') {
+                                return `
                             <div class="card">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -201,10 +214,10 @@ $( document ).ready(function() {
                                 </div>
                             </div>
                             `
-                        
-                        } else if(hit.postType === 'experts'){
 
-                            return `
+                            } else if (hit.postType === 'experts') {
+
+                                return `
                             <div class="card card--expert">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -233,8 +246,8 @@ $( document ).ready(function() {
                                     </footer>
                                 </div>
                             </div>`
-                        } else if(hit.postType === 'areas'){
-                            return `
+                            } else if (hit.postType === 'areas') {
+                                return `
                             <div class="card card--field">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span><${hit.title}</span></a>
                                 <div class="card-in">
@@ -253,8 +266,8 @@ $( document ).ready(function() {
                                 </div>
                             </div>
                             `
-                        } else if(hit.postType === 'post'){
-                            return `
+                            } else if (hit.postType === 'post') {
+                                return `
                             <div class="card card--news">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -280,8 +293,8 @@ $( document ).ready(function() {
                                     </footer>
                                 </div>
                             </div>`
-                        } else if(hit.postType === 'events'){
-                            return `
+                            } else if (hit.postType === 'events') {
+                                return `
                             <div class="card card--news">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -307,8 +320,8 @@ $( document ).ready(function() {
                                     </footer>
                                 </div>
                             </div>`
-                        } else if(hit.postType === 'partners'){
-                            return `
+                            } else if (hit.postType === 'partners') {
+                                return `
                             <div class="card card--partner">
                                 <a href="${hit.url}" class="card__link" title="${hit.title}"><span>${hit.title}</span></a>
                                 <div class="card-in">
@@ -340,22 +353,22 @@ $( document ).ready(function() {
                                     </footer>
                                 </div>
                             </div>`
-                        } else {
-                            return `<h3>${hit.postType} : ${hit.title}</h3>`
-                        }
-                        
-                    }
+                            } else {
+                                return `<h3>${hit.postType} : ${hit.title}</h3>`
+                            }
 
-                )
-                .join('')}
+                        }
+
+                    )
+                    .join('')}
             `;
         };
-    
+
         // Create the custom widget
         const customInfiniteHits = instantsearch.connectors.connectInfiniteHits(
             renderInfiniteHits
         );
-    
+
         const refListAreas = instantsearch.widgets.refinementList({
             container: '.ref-list__list--areas',
             attribute: 'areas',
@@ -386,17 +399,17 @@ $( document ).ready(function() {
         const clearRef = instantsearch.widgets.clearRefinements({
             container: '.clear-all',
             templates: {
-              resetLabel: 'Remove all',
+                resetLabel: 'Remove all',
             },
-          });
+        });
 
         // Instantiate the custom widget
         search.addWidgets([config, searchBox, refListAreas, refListSectors, refListPostType, currentFilters, clearRef,
             customInfiniteHits({
-            container: document.querySelector('.ressources-results')
+                container: document.querySelector('.ressources-results')
             })
         ]);
-        
+
         search.start();
 
     }
@@ -404,7 +417,7 @@ $( document ).ready(function() {
     // TOPBAR
     // var topBarTransitionDuration = $('.top-bar').css('transition-duration').replace('s', '') * 1000;
 
-    var setTopBarHVarDebounce = debounce(function() {
+    var setTopBarHVarDebounce = debounce(function () {
         var $topBar = $('.top-bar');
         topBarH = $topBar.outerHeight(true) + $topBar.position().top;
         document.documentElement.style.setProperty('--top-bar-h', topBarH + 'px');
@@ -424,21 +437,21 @@ $( document ).ready(function() {
         //         $('.top-bar').addClass('top-bar--small');
         //     }
         // },
-        onEnter: (self)=>{
+        onEnter: (self) => {
             $('.top-bar').addClass('top-bar--small');
             setTopBarHVarDebounce();
         },
-        onLeaveBack: (self)=>{
+        onLeaveBack: (self) => {
             $('.top-bar').removeClass('top-bar--small');
             setTopBarHVarDebounce();
         },
     });
 
-    if($('.top-bar__sub').length){
+    if ($('.top-bar__sub').length) {
         ScrollTrigger.create({
             trigger: '.header',
             //start: 'bottom top',
-            start: ()=>{ return 'bottom ' + topbarH +'px' },
+            start: () => { return 'bottom ' + topbarH + 'px' },
             end: 99999,
             // onUpdate: (self) => {
             //     if(self.direction === -1){
@@ -447,30 +460,40 @@ $( document ).ready(function() {
             //         $('.top-bar').addClass('top-bar--small');
             //     }
             // },
-            onEnter: (self)=>{
+            onEnter: (self) => {
                 $('.top-bar__sub').addClass('top-bar__sub--is-visible');
                 setTopBarHVarDebounce();
             },
-            onLeaveBack: (self)=>{
+            onLeaveBack: (self) => {
                 $('.top-bar__sub').removeClass('top-bar__sub--is-visible');
                 setTopBarHVarDebounce();
             },
         });
     }
-
-    $('.color-mode__button').on('click', function(e){
+    
+    $('.color-mode__button').on('click', function (e) {
         e.preventDefault();
-        
-        if(isLightMode){
+
+        if (lightMode == 'light') {
             $('body').addClass('dark-mode');
             $(this).removeClass('color-mode__button--light').addClass('color-mode__button--dark');
-            isLightMode = false;
+            Cookies.set('lightMode', 'dark');
+            lightMode = 'dark';
         } else {
             $('body').removeClass('dark-mode');
             $(this).removeClass('color-mode__button--dark').addClass('color-mode__button--light');
-            isLightMode = true;
+            Cookies.set('lightMode', 'light');
+            lightMode = 'light';
         }
-        
+
+    });
+
+    $('.color-mode__button').on('mouseover', function(){
+        $('body').addClass('no-transition');
+    });
+
+    $('.color-mode__button').on('mouseleave', function(){
+        $('body').removeClass('no-transition');
     });
 
     Marquee3k.init({
@@ -479,92 +502,96 @@ $( document ).ready(function() {
     Marquee3k.refreshAll();
 
 
-    $('.nl-sub').on('click', function(e){
+    $('.nl-sub').on('click', function (e) {
         e.preventDefault();
-        if(!popupNlIsOpen){
-            gsap.to($('.popup--newsletter'), {autoAlpha: 1, display: 'flex', onComplete: function(){popupNlIsOpen == true}});
+        if (!popupNlIsOpen) {
+            gsap.to($('.popup--newsletter'), { autoAlpha: 1, display: 'flex', onComplete: function () { popupNlIsOpen == true } });
         } else {
-            gsap.to($('.popup--newsletter'), {autoAlpha: 0, display: 'none', onComplete: function(){popupNlIsOpen == false}});
+            gsap.to($('.popup--newsletter'), { autoAlpha: 0, display: 'none', onComplete: function () { popupNlIsOpen == false } });
         }
     });
 
-    $('.popup--newsletter .close-popup').on('click', function(e){
-        gsap.to($('.popup--newsletter'), {autoAlpha: 0, display: 'none', onComplete: function(){popupNlIsOpen == false}});
+    $('.popup--newsletter .close-popup').on('click', function (e) {
+        gsap.to($('.popup--newsletter'), { autoAlpha: 0, display: 'none', onComplete: function () { popupNlIsOpen == false } });
     });
 
     //// TOPBAR
 
     // HEADER HOME
-    var el = $('.header__front li');
-    gsap.set(el.not(':first'), {autoAlpha:0, yPercent: 100, scale: .95});
-    var animHeader = new TimelineMax({repeat:0, delay: 10, repeatDelay: 0, onComplete: ()=>{animHeader.restart(true)} });
-    
-    for(var i=0;i<el.length;i++){
-      var E = el[i];
-        var nextE = el[i + 1];
-      // tl.to(E, 0.5, {yPercent: 0, autoAlpha:1, duration: .25, ease: Power2.easeOut})
-      //   .to(E, 0.5, {yPercent: -100, autoAlpha:0, duration: .25, ease:Power2.easeOut},'+=2.5')
-        
-        if(nextE){
-            animHeader  .to(E, {scale: .95, yPercent: -100, autoAlpha:0, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 10*i)
-                        .to(nextE, {scale: 1, yPercent: 0, autoAlpha:1, duration: 1.25, ease:Circ.easeInOut},'sameTime+=' + 10*i)
-        }
-        
-    
-    };
+    if ($('.header--home').length) {
+        var el = $('.header__front li');
+        gsap.set(el.not(':first'), { autoAlpha: 0, yPercent: 100, scale: .95 });
+        var animHeader = new TimelineMax({ repeat: 0, delay: 10, repeatDelay: 0, onComplete: () => { animHeader.restart(true) } });
+
+        for (var i = 0; i < el.length; i++) {
+            var E = el[i];
+            var nextE = el[i + 1];
+            // tl.to(E, 0.5, {yPercent: 0, autoAlpha:1, duration: .25, ease: Power2.easeOut})
+            //   .to(E, 0.5, {yPercent: -100, autoAlpha:0, duration: .25, ease:Power2.easeOut},'+=2.5')
+
+            if (nextE) {
+                animHeader.to(E, { scale: .95, yPercent: -100, autoAlpha: 0, duration: 1.25, ease: Circ.easeInOut }, 'sameTime+=' + 10 * i)
+                    .to(nextE, { scale: 1, yPercent: 0, autoAlpha: 1, duration: 1.25, ease: Circ.easeInOut }, 'sameTime+=' + 10 * i)
+            }
+
+
+        };
+    }
+
     //// HEADER HOME
 
     // DROP CARDS
+    if ($('.card-drop-list').length) {
 
-    var rotationX = [];
-    var rotationY = [];
-    var duration = [];
+        var rotationX = [];
+        var rotationY = [];
+        var duration = [];
 
-    initDrag();
+        initDrag();
 
-    let dropCard = gsap.timeline({
-        scrollTrigger: {
-            trigger: '.section--drop-cards',
-            pin: true,   // pin the trigger element while active
-            start: "top top", // when the top of the trigger hits the top of the viewport
-            end: () => { return "+=" + window.innerHeight * 3}, // end after scrolling 500px beyond the start
-            scrub: 0,
-            onLeave: function (self) {
-                let start = self.start;
-                self.scroll(self.start);
-                self.disable();
-                self.animation.progress(1, true);
-                ScrollTrigger.refresh();
-                window.scrollTo(0, start);
+        let dropCard = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.section--drop-cards',
+                pin: true,   // pin the trigger element while active
+                start: "top top", // when the top of the trigger hits the top of the viewport
+                end: () => { return "+=" + window.innerHeight * 3 }, // end after scrolling 500px beyond the start
+                scrub: 0,
+                onLeave: function (self) {
+                    let start = self.start;
+                    self.scroll(self.start);
+                    self.disable();
+                    self.animation.progress(1, true);
+                    ScrollTrigger.refresh();
+                    window.scrollTo(0, start);
+                }
             }
-        }
-    });
+        });
 
-    $('.card-drop-list .card').each(function(i){
-        //var xPos = (100 / $('.card-drop-list .card').length) * i;
-        var xPos = randomNumBetween(1, 80);
-        var yPos = randomNumBetween(10, 60);
-        var rotation = randomNumBetween(-25,25);
-        
-        rotationX.push(randomNumBetween(-80,80))
-        rotationY.push(randomNumBetween(-80,80))
-        duration.push(randomNumBetween(.5,1.5))
-        
-        gsap.set($(this), {left: xPos + '%', top: yPos + 'vh', rotate: rotation});
-    });
-    
-    dropCard	.from('.card-drop-list .card', {scale: 2, 'border-width': '0.05vw', rotateX: (i)=>rotationX[i], rotateY: (i)=>rotationY[i], duration: 1, ease: Power3.easeIn, stagger: .4}, 'start')
-                .from('.card-drop-list .card', {autoAlpha: 0, duration: .5, ease: Power3.easeIn, stagger: .4}, 'start')
-                .from('.card-drop-list .card', {filter: 'blur(10px)', duration: 1, ease: Power3.easeIn, stagger: .4}, 'start');
+        $('.card-drop-list .card').each(function (i) {
+            //var xPos = (100 / $('.card-drop-list .card').length) * i;
+            var xPos = randomNumBetween(1, 80);
+            var yPos = randomNumBetween(10, 60);
+            var rotation = randomNumBetween(-25, 25);
 
-    function initDrag(){
-        Draggable.create('.section--drop-cards .card', {type:'x,y', edgeResistance:0.65, bounds:'.section--drop-cards', inertia:true})
-    };
+            rotationX.push(randomNumBetween(-80, 80))
+            rotationY.push(randomNumBetween(-80, 80))
+            duration.push(randomNumBetween(.5, 1.5))
 
+            gsap.set($(this), { left: xPos + '%', top: yPos + 'vh', rotate: rotation });
+        });
+
+        dropCard.from('.card-drop-list .card', { scale: 2, 'border-width': '0.05vw', rotateX: (i) => rotationX[i], rotateY: (i) => rotationY[i], duration: 1, ease: Power3.easeIn, stagger: .4 }, 'start')
+            .from('.card-drop-list .card', { autoAlpha: 0, duration: .5, ease: Power3.easeIn, stagger: .4 }, 'start')
+            .from('.card-drop-list .card', { filter: 'blur(10px)', duration: 1, ease: Power3.easeIn, stagger: .4 }, 'start');
+
+        function initDrag() {
+            Draggable.create('.section--drop-cards .card', { type: 'x,y', edgeResistance: 0.65, bounds: '.section--drop-cards', inertia: true })
+        };
+    }
     //// DROP CARDS
     // HOME HOW
 
-    if($('.how-list').length){
+    if ($('.how-list').length) {
         let howToAnim = gsap.timeline({
             scrollTrigger: {
                 trigger: '.section--how',
@@ -572,21 +599,21 @@ $( document ).ready(function() {
                 //markers: true
             }
         });
-        
-        howToAnim	.from('.how-list__item', {autoAlpha: 0, stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to')
-                    .from('.how-list__arrow path', {autoAlpha: 0, '--offset': 813, stagger: .4, duration: .5, ease: Power3.easeInOut}, 'how-to+=.1');
+
+        howToAnim.from('.how-list__item', { autoAlpha: 0, stagger: .4, duration: .5, ease: Power3.easeInOut }, 'how-to')
+            .from('.how-list__arrow path', { autoAlpha: 0, '--offset': 813, stagger: .4, duration: .5, ease: Power3.easeInOut }, 'how-to+=.1');
     }
 
     //// HOME HOW
     // CARD
 
-    $('body').on('mouseenter', '.card__link', function(){
+    $('body').on('mouseenter', '.card__link', function () {
         var thisCard = $(this).parent('.card');
-        console.log(thisCard);
+        // console.log(thisCard);
         thisCard.addClass('card--hover');
     });
 
-    $('body').on('mouseleave', '.card__link', function(){
+    $('body').on('mouseleave', '.card__link', function () {
         var thisCard = $(this).parent('.card');
         thisCard.removeClass('card--hover');
     });
@@ -595,36 +622,36 @@ $( document ).ready(function() {
 
     // SIDE NAV
 
-    $('.side-nav a').on('click', function(e){
+    $('.side-nav a').on('click', function (e) {
         e.preventDefault();
         var thisHash = $(this).attr('href');
         //gsap.to(window, {duration: 1, scrollTo: thisHash});
-        gsap.to(window, {duration: 1, scrollTo: {y: thisHash, offsetY: topbarH - 2}, ease: Power3.easeOut });
+        gsap.to(window, { duration: 1, scrollTo: { y: thisHash, offsetY: topbarH - 2 }, ease: Power3.easeOut });
     });
 
-    $('.article .block[id]').each(function(){
+    $('.article .block[id]').each(function () {
         var thisId = $(this).attr('id')
-        var $thisRelatedNavItem = $('.side-nav__link[href="#'+ thisId +'"]');
-    
+        var $thisRelatedNavItem = $('.side-nav__link[href="#' + thisId + '"]');
+
         ScrollTrigger.create({
             trigger: $(this),
             // start: 'top 40px',
-            start: ()=>{ return 'top ' + topbarH +'px' },
+            start: () => { return 'top ' + topbarH + 'px' },
             end: '1000000px',
-            toggleClass: {targets: $thisRelatedNavItem, className: 'side-nav__link--is-active'},
-            onEnter: function(){
+            toggleClass: { targets: $thisRelatedNavItem, className: 'side-nav__link--is-active' },
+            onEnter: function () {
                 //console.log($thisRelatedNavItem.parent('li').length)
-                if($thisRelatedNavItem.parent('li').length){
+                if ($thisRelatedNavItem.parent('li').length) {
                     var h = $thisRelatedNavItem.parent('li').position().top + $thisRelatedNavItem.parent('li').outerHeight(true);
-                    gsap.to('.side-nav__list', {'--h': h + 'px', duration: .5});
+                    gsap.to('.side-nav__list', { '--h': h + 'px', duration: .5 });
                 }
-                
+
             },
-            onLeaveBack: function(){
+            onLeaveBack: function () {
                 //console.log($thisRelatedNavItem.parent('li').length)
-                if($thisRelatedNavItem.parent('li').length){
+                if ($thisRelatedNavItem.parent('li').length) {
                     var h = $thisRelatedNavItem.parent('li').position().top;
-                    gsap.to('.side-nav__list', {'--h': h + 'px', duration: .5});
+                    gsap.to('.side-nav__list', { '--h': h + 'px', duration: .5 });
                 }
             }
         });
@@ -634,83 +661,87 @@ $( document ).ready(function() {
 
     // SLIDERS
 
-        // SLIDER LAST NEWS
+    // SLIDER LAST NEWS
 
-        var lastNewsSlider = $('.slider--last-news').flickity({
+    var lastNewsSlider = $('.slider--last-news').flickity({
+        // options
+        cellAlign: 'left',
+        contain: true,
+        prevNextButtons: false,
+        pageDots: true
+    });
+
+    // SLIDER PARTNERS
+
+    var partnersSlider = $('.slider--partners').flickity({
+        // options
+        cellAlign: 'left',
+        contain: true,
+        prevNextButtons: false,
+        pageDots: true
+    });
+
+    // SLIDER STAT
+
+    $('.stats-slider').each(function () {
+        var statSlide = $(this).flickity({
             // options
             cellAlign: 'left',
             contain: true,
             prevNextButtons: false,
-            pageDots: true
+            pageDots: false
         });
+    });
 
-        // SLIDER PARTNERS
 
-        var partnersSlider = $('.slider--partners').flickity({
-            // options
-            cellAlign: 'left',
-            contain: true,
-            prevNextButtons: false,
-            pageDots: true
-        });
 
-        // SLIDER STAT
+    // SLIDER TIMELINE  
+    var timeLineSlider = $('.timeline-slider').flickity({
+        // options
+        cellAlign: 'left',
+        contain: true,
+        prevNextButtons: false,
+        pageDots: false,
+        freeScroll: true
+    });
 
-        $('.stats-slider').each(function(){
-            var statSlide = $(this).flickity({
-                // options
-                cellAlign: 'left',
-                contain: true,
-                prevNextButtons: false,
-                pageDots: false
-            });
-        });
-
-        
-
-        // SLIDER TIMELINE  
-        var timeLineSlider = $('.timeline-slider').flickity({
-            // options
-            cellAlign: 'left',
-            contain: true,
-            prevNextButtons: false,
-            pageDots: false,
-            freeScroll: true
-          });
-
-        timeLineSlider.on( 'scroll.flickity', function( event, progress ) {
-            //progress = Math.max( 0, Math.min( 1, progress ) );
-            //$progressBar.width( progress * 100 + '%' );
-            progress = gsap.utils.clamp(0, 1, progress)
-            console.log(progress * 100);
-            gsap.set('.timeline-slider', {'--position' : progress * 100 + '%'});
-        });
+    timeLineSlider.on('scroll.flickity', function (event, progress) {
+        //progress = Math.max( 0, Math.min( 1, progress ) );
+        //$progressBar.width( progress * 100 + '%' );
+        progress = gsap.utils.clamp(0, 1, progress)
+        console.log(progress * 100);
+        gsap.set('.timeline-slider', { '--position': progress * 100 + '%' });
+    });
 
     //// SLIDERS
 
     // DROPDOWNS
 
-    $('.dropdown__trigger').on('click', function(){
+    $('.dropdown__trigger').on('click', function () {
         var thisDropdown = $(this).parents('.dropdown');
         var isClosed = thisDropdown.hasClass('dropdown--is-closed');
         var thisDropdownContent = thisDropdown.find('.dropdown__content');
         var dropDownH = thisDropdownContent.find('>div').outerHeight(true);
-    
-        if(isClosed){
+
+        if (isClosed) {
             $('.dropdown').removeClass('dropdown--is-open').addClass('dropdown--is-closed');
-            gsap.to($('.dropdown__content'), 1, {height: 0, ease: Expo.easeInOut});
-            gsap.to(thisDropdownContent, 1, {height: dropDownH + 'px', ease: Expo.easeInOut, onComplete: function(){
-                gsap.set(thisDropdownContent, {height: 'auto'});
-                ScrollTrigger.refresh();
-            }});
+            gsap.to($('.dropdown__content'), 1, { height: 0, ease: Expo.easeInOut });
+            gsap.to(thisDropdownContent, 1, {
+                height: dropDownH + 'px', ease: Expo.easeInOut, onComplete: function () {
+                    gsap.set(thisDropdownContent, { height: 'auto' });
+                    ScrollTrigger.refresh();
+                }
+            });
 
 
             $(this).parents('.dropdown').removeClass('dropdown--is-closed').addClass('dropdown--is-open');
-    
+
         } else {
-            gsap.to(thisDropdownContent, 1, {height: 0, ease: Expo.easeInOut, onComplete: function(){
-                ScrollTrigger.refresh();
-            }});
+            gsap.to(thisDropdownContent, 1, {
+                height: 0, ease: Expo.easeInOut, onComplete: function () {
+                    ScrollTrigger.refresh();
+                }
+            });
             $(this).parents('.dropdown').removeClass('dropdown--is-open').addClass('dropdown--is-closed');
         };
     });
@@ -719,7 +750,7 @@ $( document ).ready(function() {
 
     const players = Array.from(document.querySelectorAll('.block--video__video')).map((p) => new Plyr(p));
 
-    $('.block--video__video button').on('click', function(e){
+    $('.block--video__video button').on('click', function (e) {
         e.preventDefault();
         var vidId = $(this).data('video-id');
 
@@ -739,17 +770,17 @@ $( document ).ready(function() {
     });
 
     // FEATURED BLOCK / DRAGGABLE
-    $('.block--featured').each(function(){
+    $('.block--featured').each(function () {
         var thisFeaturedBlock = $(this);
         var thisCards = thisFeaturedBlock.find('.card');
 
-        thisCards.each(function(){
-            var rotation = randomNumBetween(-10,10);
-            $(this).css('transform', 'rotate('+ rotation +'deg)');
+        thisCards.each(function () {
+            var rotation = randomNumBetween(-10, 10);
+            $(this).css('transform', 'rotate(' + rotation + 'deg)');
         });
     });
 
-    Draggable.create('.block--featured .card', {type:'x,y', edgeResistance:0.65, bounds:'.block--featured', inertia:true, zIndexBoost: true});
+    Draggable.create('.block--featured .card', { type: 'x,y', edgeResistance: 0.65, bounds: '.block--featured', inertia: true, zIndexBoost: true });
 
     //// FEATURED BLOCK / DRAGGABLE
 
@@ -758,7 +789,7 @@ $( document ).ready(function() {
     gsap.from('.footer__contact', {
         yPercent: 100,
         scale: .95,
-        scrollTrigger : {
+        scrollTrigger: {
             //markers: true,
             trigger: '.footer',
             start: 'top bottom',
@@ -779,7 +810,7 @@ $( document ).ready(function() {
     ScrollTrigger.refresh();
 
 
-    function killAllScrollTrigger(){
+    function killAllScrollTrigger() {
         // let Alltrigger = ScrollTrigger.getAll();
 
         // for (let i = 0; i < Alltrigger.length; i++) {
@@ -789,45 +820,45 @@ $( document ).ready(function() {
         ScrollTrigger.refresh();
         //window.dispatchEvent(new Event("resize"));
     };
-    
-    function preventSamePageReload(){
+
+    function preventSamePageReload() {
         var links = document.querySelectorAll('a[href]');
-        var cbk = function(e) {
-            if(e.currentTarget.href === window.location.href) {
+        var cbk = function (e) {
+            if (e.currentTarget.href === window.location.href) {
                 e.preventDefault();
                 e.stopPropagation();
             }
         };
 
-        for(var i = 0; i < links.length; i++) {
+        for (var i = 0; i < links.length; i++) {
             links[i].addEventListener('click', cbk);
         }
     };
 
-    function randomNumBetween(min,max){
-        return Math.floor(Math.random()*(max-min+1)+min);
+    function randomNumBetween(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     function debounce(func, wait, immediate) {
         var timeout;
-      
+
         return function executedFunction() {
-          var context = this;
-          var args = arguments;
-              
-          var later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-          };
-      
-          var callNow = immediate && !timeout;
-          
-          clearTimeout(timeout);
-      
-          timeout = setTimeout(later, wait);
-          
-          if (callNow) func.apply(context, args);
+            var context = this;
+            var args = arguments;
+
+            var later = function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+
+            var callNow = immediate && !timeout;
+
+            clearTimeout(timeout);
+
+            timeout = setTimeout(later, wait);
+
+            if (callNow) func.apply(context, args);
         };
-      };
+    };
 
 });

@@ -76,3 +76,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+@ini_set( 'upload_max_filesize' , '700M' );
+@ini_set( 'post_max_size', '700M');
+@ini_set( 'memory_limit', '700M' );
+@ini_set( 'max_execution_time', '0' );
+@ini_set( 'max_input_time', '300' );

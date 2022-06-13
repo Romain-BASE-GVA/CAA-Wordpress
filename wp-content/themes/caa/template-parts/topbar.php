@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="nav-box">
-                    <h2>Acteurs</h2>
+                    <h2>Community</h2>
                     <div class="nav-box__wrap-list">
                         <ul class="nav-list nav-list--level-1">
                             <li class="nav-item nav-item--level-1"><a href="#">Rencontrer</a></li>
@@ -80,9 +80,11 @@
             <div class="switches">
 
                 <div class="lang-switch"></div>
-
+                <?php
+                    $lightMode = isset($_COOKIE['lightMode']) ? $_COOKIE['lightMode'] : 'light';
+                ?>
                 <div class="color-mode">
-                    <button class="color-mode__button color-mode__button--light">
+                    <button class="color-mode__button color-mode__button--<?php echo $lightMode; ?>">
                         <span>
                             <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <line x1="11.5" x2="11.5" y2="22" stroke="black" />

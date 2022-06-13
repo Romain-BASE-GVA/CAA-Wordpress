@@ -1,4 +1,5 @@
-<section class="block block--grid-list" id="<?php echo $args['blockID']; ?>">
+<?php $gridTypeClass = get_sub_field('grid_type') == 'with-bg' ? 'block--grid-list--with-bg' : ''  ?>
+<section class="block block--grid-list <?php echo $gridTypeClass; ?>" id="<?php echo $args['blockID']; ?>">
     <h2 class="block__title<?php echo $args['hideTitle']; ?>"><?php echo $args['blockTitle']; ?></h2>
     <?php if( have_rows('item') ): ?>
     <ul class="grid-list grid-list--<?php echo $args['type']; ?>">
