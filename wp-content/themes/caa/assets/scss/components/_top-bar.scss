@@ -59,6 +59,7 @@
 }
 
 .top-bar__main {
+    position: relative;
     display: flex;
     width: 100%;
     padding: 0 $gutter/4*3;
@@ -130,7 +131,11 @@
 }
 
 .top-bar__tools {
+    position: absolute;
     display: flex;
+    top: 0;
+    right: 0;
+    height: 100%;
     align-items: center;
     padding: 0 $gutter/4*3 0 0;
     border-radius: 50px;
@@ -141,6 +146,8 @@
     }
 
     .top-bar--small & {
+        right: 30px;
+
         .dark-mode & {
             border: 1px solid transparent;
         }
@@ -321,6 +328,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    height: 100%;
 }
 
 .nav-box {
@@ -329,15 +337,16 @@
     position: relative;
     display: flex;
     align-items: center;
+    height: 100%;
 
     &:after {
         content: "";
         position: absolute;
         display: block;
-        top: calc(50% - 32.74px);
+        top: 0;
         right: 0;
         width: 1px;
-        height: 65.48px;
+        height: 100%;
         background-color: rgba($black, .6);
 
         .dark-mode & {
