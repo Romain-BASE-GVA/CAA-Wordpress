@@ -10,7 +10,7 @@
 }
 
 body {
-	&.no-transition *:not(.color-mode__button > span) {
+	&.no-transition *:not(.color-mode__button *) {
 		transition: none!important;
 	}
 

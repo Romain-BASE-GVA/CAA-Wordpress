@@ -166,6 +166,12 @@
     background-color: $lightest-grey;
     border-radius: 55px;
     padding: 0 $gutter*2 0 $gutter/2;
+
+    .dark-mode & {
+        background-color: $black;
+        color: $white;
+        border: 1px solid $white;
+    }
 }
 
 .ref-list__title {

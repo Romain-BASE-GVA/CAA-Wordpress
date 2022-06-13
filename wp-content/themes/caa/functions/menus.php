@@ -3,9 +3,9 @@
 // Ajout du menu principal
 function caa_register_my_menu() {
 	register_nav_menus( array(
-		'primary'	=> __( 'Main nav', 'caa' ),
-		'footer'	=> __( 'Footer nav', 'caa' ),
-		// 'showroom'	=> __( 'Menu footer Showroom', 't-ing' ),
+		'solutions'	=> __( 'Solutions Navigation', 'caa' ),
+		'community'	=> __( 'Community Navigation', 'caa' ),
+		'showroom'	=> __( 'Footer Navigation', 'caa' ),
 		// 'legal'	=> __( 'Menu mentions légales', 't-ing' ),
 		// 'decouvrir'	=> __( 'Menu footer Decouvrir', 't-ing' )
 	));

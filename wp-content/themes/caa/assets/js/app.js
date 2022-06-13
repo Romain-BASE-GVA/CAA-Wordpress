@@ -417,6 +417,10 @@ $(document).ready(function () {
     // TOPBAR
     // var topBarTransitionDuration = $('.top-bar').css('transition-duration').replace('s', '') * 1000;
 
+    $('.menu a[href="#"]').on('click', function(e){
+        e.preventDefault();
+    });
+
     var setTopBarHVarDebounce = debounce(function () {
         var $topBar = $('.top-bar');
         topBarH = $topBar.outerHeight(true) + $topBar.position().top;

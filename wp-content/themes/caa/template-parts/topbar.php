@@ -1,87 +1,28 @@
 <div class="top-bar top-bar--grey">
     <div class="top-bar__main">
         <a href="<?php echo get_home_url(); ?>" class="top-bar__logo" title="Back Home">
-        <?php get_template_part( 'template-parts/logo-svg' ); ?>
+            <?php get_template_part('template-parts/logo-svg'); ?>
         </a>
         <div class="top-bar__tools">
             <nav class="nav nav--top-bar">
                 <div class="nav-box">
-                    <h2>Solutions</h2>
+                    <span class="nav__title">Solutions</span>
                     <div class="nav-box__wrap-list">
-                        <ul class="nav-list nav-list--level-1">
-                            <li class="nav-item nav-item--level-1">
-                                <a href="#" title="">Agir</a>
-                                <ul class="nav-list nav-list--level-2">
-                                    <li class="nav-item nav-item--level-2">
-                                        <a href="#">Domaines</a>
-                                        <ul class="nav-list nav-list--level-3">
-                                            <li><a href="">Transport</a></li>
-                                            <li><a href="">Achats</a></li>
-                                            <li><a href="">Energie</a></li>
-                                            <li><a href="">Dechets</a></li>
-                                            <li><a href="">Ecosysteme</a></li>
-                                            <li><a href="">Transversal</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item nav-item--level-2">
-                                        <a href="#">Solutions</a>
-                                        <ul class="nav-list nav-list--level-3">
-                                            <li><a href="">Solutions a</a></li>
-                                            <li><a href="">Solutions b</a></li>
-                                            <li><a href="">Solutions c</a></li>
-                                            <li><a href="">Solutions d</a></li>
-                                            <li><a href="">Solutions e</a></li>
-                                            <li><a href="">Solutions e</a></li>
-                                            <li><a href="">Solutions f</a></li>
-                                            <li><a href="">Solutions g</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item nav-item--level-2"><a href="#">Outils</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item nav-item--level-1" data-related-sub="comprendre">
-                                <a href="">Comprendre</a>
-                                <ul class="nav-list nav-list--level-2">
-                                    <li class="nav-item nav-item--level-2">
-                                        <a href="#">Comprendre 1</a>
-                                        <ul class="nav-list nav-list--level-3">
-                                            <li><a href="">Comprendre 1 a</a></li>
-                                            <li><a href="">Comprendre 1 b</a></li>
-                                            <li><a href="">Comprendre 1 c</a></li>
-                                            <li><a href="">Comprendre 1 d</a></li>
-                                            <li><a href="">Comprendre 1 e</a></li>
-                                            <li><a href="">Comprendre 1 f</a></li>
-                                            <li><a href="">Comprendre 1 g</a></li>
-                                            <li><a href="">Comprendre 1 h</a></li>
-                                            <li><a href="">Comprendre 1 i</a></li>
-                                            <li><a href="">Comprendre 1 g</a></li>
-                                            <li><a href="">Comprendre 1 h</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item nav-item--level-2"><a href="#">Comprendre 2</a></li>
-                                    <li class="nav-item nav-item--level-2"><a href="#">Comprendre 3</a></li>
-                                    <li class="nav-item nav-item--level-2"><a href="#">Comprendre 4</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item nav-item--level-1" data-related-sub="secteurs"><a href="">Secteurs</a></li>
-                        </ul>
+                        <?php wp_nav_menu( array('theme_location' => 'solutions' )); ?>
                     </div>
                 </div>
                 <div class="nav-box">
-                    <h2>Community</h2>
+                    <span class="nav__title">Community</span>
                     <div class="nav-box__wrap-list">
-                        <ul class="nav-list nav-list--level-1">
-                            <li class="nav-item nav-item--level-1"><a href="#">Rencontrer</a></li>
-                            <li class="nav-item nav-item--level-1"><a href="#">Rejoindre</a></li>
-                        </ul>
+                        <?php wp_nav_menu( array('theme_location' => 'community' )); ?>
                     </div>
                 </div>
             </nav>
             <div class="switches">
 
-                <div class="lang-switch"></div>
+                <div class="lang-switch"><?php echo do_shortcode('[wpml_language_selector_widget]') ?></div>
                 <?php
-                    $lightMode = isset($_COOKIE['lightMode']) ? $_COOKIE['lightMode'] : 'light';
+                $lightMode = isset($_COOKIE['lightMode']) ? $_COOKIE['lightMode'] : 'light';
                 ?>
                 <div class="color-mode">
                     <button class="color-mode__button color-mode__button--<?php echo $lightMode; ?>">
@@ -100,9 +41,9 @@
             </div>
         </div>
     </div>
-    <?php 
-        if(!is_front_page()):
-            get_template_part( 'template-parts/topbar-sub' );
-        endif;
+    <?php
+    if (!is_front_page()) :
+        get_template_part('template-parts/topbar-sub');
+    endif;
     ?>
 </div>

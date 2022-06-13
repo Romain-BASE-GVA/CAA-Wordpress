@@ -74,6 +74,10 @@
     border-radius: 60px;
     overflow: hidden;
 
+    .dark-mode & {
+        border: 1px solid $white;
+    }
+
     .aa-InputWrapperPrefix {
         display: none;
     }
@@ -179,7 +183,7 @@
     width: 80px;
     height: 100%;
     border: none;
-    border-left: 1px solid #000000;
+    border-left: 1px solid $black;
     background: #FFF;
     cursor: pointer;
     z-index: 10;
@@ -199,10 +203,28 @@
         background-color: $primary-blue;
 
         path {
-            fill: white;
+            fill: $white;
             
         }
     }
+
+    .dark-mode & {
+        background-color: $black;
+        border-left: 1px solid $white;
+
+        path {
+            fill: $white;
+        }
+
+        &:hover {
+            background-color: $white;
+
+            path {
+                fill: $black
+            }
+        }
+    }
+
 }
 
 .header--internal {
