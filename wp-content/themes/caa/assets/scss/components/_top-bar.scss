@@ -347,7 +347,7 @@
         right: 0;
         width: 1px;
         height: 100%;
-        background-color: rgba($black, .6);
+        background-color: $normal-grey;
 
         .dark-mode & {
             background-color: rgba($white, 1);
